@@ -1,0 +1,210 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Catálogo de especies (solo lectura, datos maestros)
+model SpeciesCatalogItem {
+  id                 String   @id
+  commonName         String
+  scientificName     String
+  category           String
+  habitat            Json
+  averageSize        String
+  averageWeight      String
+  season             Json
+  fishingMethod      Json
+  commercialValue    String
+  description        String   @db.Text
+  minSize            String?
+  region             Json
+  imageUrl           String
+  identificationTips Json
+  keyDifferences     Json?
+  similarSpecies     Json?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relaciones
+  catches Catch[]
+
+  @@map("species_catalog")
+}
+
+// Entrada de pesca (bitácora)
+model FishingEntry {
+  id              String   @id
+  userId          String?
+  date            String?
+  startTime       String?
+  endTime         String?
+  skipper         String?
+  method          String?   // Arte de pesca: hookah, semi-autonomo, etc
+  area            String?   // Zona de pesca
+  depth           String?   // Profundidad en metros
+  latitude        Float?    // Latitud de coordenadas
+  longitude       Float?    // Longitud de coordenadas
+  crewWages       String?   // Salarios tripulación
+  fuelConsumption String?   // Consumo de combustible
+  weather         String?   // Condiciones climáticas
+  observations    String?   @db.Text // Observaciones generales
+  gps             String?   // Formato: "lat, lng"
+  location        String?   // Nombre descriptivo de ubicación
+  status          String?   // Estado: Pendiente, Validado, etc
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relaciones
+  catches       Catch[]
+  crewMembers   EntryCrewMember[]
+  production    ProductionData?
+  user          User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+
+  @@map("fishing_entries")
+}
+
+// Marineros/Tripulantes (tabla maestra reutilizable)
+model CrewMember {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  entries EntryCrewMember[]
+
+  @@map("crew_members")
+}
+
+// Relación muchos a muchos entre FishingEntry y CrewMembers
+model EntryCrewMember {
+  id          String   @id @default(cuid())
+  entryId     String
+  crewMemberId String
+  divingTime  String?  // Tiempo de buceo en minutos
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  entry       FishingEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  crewMember  CrewMember   @relation(fields: [crewMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([entryId, crewMemberId])
+  @@map("entry_crew_members")
+}
+
+// Capturas (línea detallada de cada especie capturada por entrada)
+model Catch {
+  id        String   @id @default(cuid())
+  entryId   String
+  speciesId String
+  crates    String?  // Número de cajones
+  weight    String?  // Peso en KG
+  size      String?  // Talla: small, medium, large, extra-large
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones
+  entry   FishingEntry       @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  species SpeciesCatalogItem @relation(fields: [speciesId], references: [id], onDelete: Restrict)
+
+  @@map("catches")
+}
+
+// Datos de producción (específico para vieira y especies que requieren procesamiento)
+model ProductionData {
+  id               String   @id @default(cuid())
+  entryId          String   @unique // Una entrada solo tiene un registro de producción
+  sacoMuestras     String?  // Sí/No
+  kgPulpaVieira    String?  // Kg de pulpa de vieira procesada
+  numBolsas        String?  // Número de bolsas
+  kgPorBolsa       String?  // Kg por bolsa
+  rindePulpaVieira String?  // Rendimiento en porcentaje
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relaciones
+  entry FishingEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@map("production_data")
+}
+
+model User {
+  id                   String    @id @default(cuid())
+  name                 String?
+  email                String    @unique
+  emailVerified        DateTime?
+  image                String?
+  password             String?
+  
+  // Perfil de pescador
+  phoneNumber          String?
+  fishingZone          String?   // Zona principal de pesca
+  yearsOfExperience    Int?      // Años de experiencia
+  boatName             String?   // Nombre de la embarcación
+  documentId           String?   // Cédula/DNI
+  bio                  String?   @db.Text // Biografía o descripción personal
+  profileImage         String?   // URL de la foto de perfil (almacenada en servidor)
+  isProfilePublic      Boolean   @default(true) // ¿Perfil visible públicamente?
+  
+  // Estadísticas
+  badges               Json      @default("[]") // Array de insignias ganadas
+  totalEntries         Int       @default(0)
+  totalCatchWeight     Float     @default(0)
+  favoriteSpecies      String?   // Especie más capturada
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  entries       FishingEntry[]
+
+  @@map("users")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([sessionToken])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
+}

@@ -1,0 +1,417 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tema marítimo por defecto - Modo Claro (valores dinámicos) */
+    --background: 210 100% 97%;
+    --foreground: 215 10% 20%;
+    --card: 210 100% 98%;
+    --card-foreground: 215 10% 20%;
+    --popover: 210 100% 98%;
+    --popover-foreground: 215 10% 20%;
+    --primary: 200 85% 45%;
+    --primary-foreground: 210 100% 98%;
+    --secondary: 205 40% 85%;
+    --secondary-foreground: 215 10% 20%;
+    --muted: 205 30% 88%;
+    --muted-foreground: 220 8% 45%;
+    --accent: 225 50% 75%;
+    --accent-foreground: 215 10% 20%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 100% 98%;
+    --border: 205 25% 80%;
+    --input: 210 40% 98%;
+    --ring: 200 85% 45%;
+    --radius: 0.75rem;
+    --chart-1: 200 85% 45%;
+    --chart-2: 225 75% 55%;
+    --chart-3: 195 65% 45%;
+    --chart-4: 180 70% 50%;
+    --chart-5: 165 75% 55%;
+    --chart-4: 155 70% 50%;
+    --chart-5: 140 75% 55%;
+    /* Variables para efectos visuales */
+    --theme-background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    /* Glass effects - Light mode */
+    --glass-bg: hsl(var(--background) / 0.8);
+    --glass-border: hsl(var(--border) / 0.5);
+    --glass-blur: blur(12px);
+
+    /* Interactive elements - Light mode */
+    --interactive-bg: hsl(var(--muted) / 0.5);
+    --interactive-hover: hsl(var(--muted) / 0.8);
+    --progress-bg: hsl(var(--muted));
+    --progress-fill: hsl(var(--primary));
+    --input-bg: hsl(var(--input));
+    --input-border: hsl(var(--border));
+
+    /* Status indicators */
+    --indicator-primary: hsl(var(--primary));
+    --indicator-success: 142 71% 45%;
+    --indicator-warning: 45 93% 47%;
+    --indicator-info: 217 91% 60%;
+    --indicator-muted: 215 14% 34%;
+
+    --wave-animation: wave 3s ease-in-out infinite;
+
+    /* Sidebar colors for maritime theme */
+    --sidebar-background: 200 85% 95%;
+    --sidebar-foreground: 215 25% 27%;
+    --sidebar-primary: 200 85% 45%;
+    --sidebar-primary-foreground: 210 100% 98%;
+    --sidebar-accent: 185 75% 85%;
+    --sidebar-accent-foreground: 215 25% 27%;
+    --sidebar-border: 195 35% 80%;
+    --sidebar-ring: 200 85% 45%;
+  }
+
+  .dark {
+    /* Tema marítimo por defecto - Modo Oscuro (valores dinámicos) */
+    --background: 210 50% 8%;
+    --foreground: 215 40% 92%;
+    --card: 210 50% 15%;
+    --card-foreground: 215 40% 92%;
+    --popover: 210 50% 10%;
+    --popover-foreground: 215 40% 92%;
+    --primary: 200 85% 55%;
+    --primary-foreground: 210 50% 8%;
+    --secondary: 215 15% 18%;
+    --secondary-foreground: 215 40% 92%;
+    --muted: 215 15% 18%;
+    --muted-foreground: 220 8% 65%;
+    --accent: 225 50% 35%;
+    --accent-foreground: 215 40% 92%;
+    --destructive: 0 75% 45%;
+    --destructive-foreground: 215 40% 92%;
+    --border: 215 15% 18%;
+    --input: 215 20% 25%;
+    --ring: 200 85% 55%;
+    --chart-1: 200 85% 55%;
+    --chart-2: 225 75% 65%;
+    --chart-3: 195 65% 55%;
+    --chart-4: 180 70% 60%;
+    --chart-5: 165 75% 65%;
+    /* Dark mode glass effects */
+    --glass-bg: hsl(var(--background) / 0.6);
+    --glass-border: hsl(var(--border) / 0.3);
+    --glass-blur: blur(12px);
+
+    /* Interactive elements - Dark mode */
+    --interactive-bg: hsl(var(--muted) / 0.5);
+    --interactive-hover: hsl(var(--muted) / 0.8);
+    --progress-bg: hsl(var(--muted));
+    --progress-fill: hsl(var(--primary));
+    --input-bg: hsl(var(--input));
+    --input-border: hsl(var(--border));
+
+    /* Dark sidebar colors */
+    --sidebar-background: 215 30% 12%;
+    --sidebar-foreground: 210 60% 92%;
+    --sidebar-primary: 200 85% 55%;
+    --sidebar-primary-foreground: 215 30% 8%;
+    --sidebar-accent: 185 75% 25%;
+    --sidebar-accent-foreground: 210 60% 92%;
+    --sidebar-border: 215 25% 18%;
+    --sidebar-ring: 200 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  } */
+}
+
+/* Efectos glassmorphism */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -4px hsl(var(--primary) / 0.1);
+  }
+
+  /* Interactive elements */
+  .interactive-element {
+    background: var(--interactive-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .interactive-element:hover {
+    background: var(--interactive-hover);
+  }
+
+  /* Progress bars */
+  .progress-bar {
+    background: var(--progress-bg);
+    border-radius: 9999px;
+    height: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--progress-fill);
+    border-radius: 9999px;
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+
+  /* Input styling - Mejorado para mejor contraste */
+  .themed-input {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    color: hsl(var(--foreground));
+    box-shadow: inset 0 1px 2px hsl(var(--border) / 0.1);
+  }
+
+  .themed-input:hover {
+    border-color: hsl(var(--ring) / 0.5);
+  }
+
+  .themed-input:focus {
+    border-color: hsl(var(--ring)) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2), inset 0 1px 2px hsl(var(--border) / 0.1);
+  }
+
+  /* Override global de inputs para mejor contraste - aplicar automáticamente */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"] {
+    background: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+  }
+
+  input[type="text"]:hover,
+  input[type="number"]:hover,
+  input[type="email"]:hover,
+  input[type="password"]:hover,
+  input[type="search"]:hover,
+  input[type="tel"]:hover,
+  input[type="url"]:hover {
+    border-color: hsl(var(--ring) / 0.5) !important;
+  }
+
+  /* Forzar estilos para el componente Input de shadcn */
+  .bg-background[class*="border-input"] {
+    background: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+  }
+
+  .bg-background[class*="border-input"]:hover {
+    border-color: hsl(var(--ring) / 0.5) !important;
+  }
+
+  /* Aplicar los mismos estilos a SelectTrigger y otros elementos de formulario */
+  .themed-input,
+  [data-radix-select-trigger].themed-input {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+  }
+
+  .themed-input:focus,
+  [data-radix-select-trigger].themed-input:focus {
+    border-color: hsl(var(--ring)) !important;
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2), inset 0 1px 2px hsl(var(--border) / 0.1);
+  }
+
+  /* Status indicators */
+  .indicator-primary {
+    background: var(--indicator-primary);
+  }
+
+  .indicator-success {
+    background: hsl(var(--indicator-success));
+  }
+
+  .indicator-warning {
+    background: hsl(var(--indicator-warning));
+  }
+
+  .indicator-info {
+    background: hsl(var(--indicator-info));
+  }
+
+  .indicator-muted {
+    background: hsl(var(--indicator-muted));
+  }
+
+  .maritime-gradient {
+    background: linear-gradient(135deg,
+        hsl(var(--primary)) 0%,
+        hsl(var(--accent)) 50%,
+        hsl(var(--secondary)) 100%);
+  }
+
+  .wave-pattern {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave-pattern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        hsl(var(--foreground) / 0.1),
+        transparent);
+    animation: wave 3s infinite;
+  }
+
+  .theme-background {
+    background-image: var(--theme-background-image);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  }
+
+  .ocean-animation {
+    background: linear-gradient(-45deg,
+        hsl(var(--primary) / 0.1),
+        hsl(var(--accent) / 0.1),
+        hsl(var(--secondary) / 0.1),
+        hsl(var(--primary) / 0.1));
+    background-size: 400% 400%;
+    animation: ocean-wave 15s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .maritime-shadow {
+    box-shadow:
+      0 4px 6px -1px hsl(var(--primary) / 0.1),
+      0 2px 4px -1px hsl(var(--primary) / 0.06);
+  }
+
+  .maritime-shadow-lg {
+    box-shadow:
+      0 10px 15px -3px hsl(var(--primary) / 0.1),
+      0 4px 6px -2px hsl(var(--primary) / 0.05);
+  }
+}
+
+/* Animaciones */
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes ocean-wave {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Efectos de hover mejorados */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 25px -5px hsl(var(--primary) / 0.1),
+    0 10px 10px -5px hsl(var(--primary) / 0.04);
+}
+
+/* Asegurar consistencia en los colores de las cards */
+@layer components {
+
+  /* Forzar que las cards usen exactamente las variables CSS definidas */
+  .bg-card {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border-color: hsl(var(--border));
+  }
+}
+
+/* Responsividad mejorada */
+@media (max-width: 768px) {
+  .theme-background {
+    background-attachment: scroll;
+  }
+}

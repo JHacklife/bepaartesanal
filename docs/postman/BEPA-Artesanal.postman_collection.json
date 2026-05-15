@@ -1,0 +1,422 @@
+{
+  "info": {
+    "_postman_id": "2e6d8aa9-1f4a-4b8f-9ab8-5e51f51d63b1",
+    "name": "BEPA Artesanal API",
+    "description": "Coleccion Postman para pruebas QA de endpoints BEPA Artesanal.\n\nFlujo recomendado:\n1) Auth > Get CSRF Token\n2) Auth > Sign In (Credentials)\n3) Ejecutar endpoints protegidos\n\nVariables requeridas:\n- baseUrl\n- testEmail\n- testPassword\n- entryId (para delete)\n- profileImagePath (ruta local para upload)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('baseUrl')) {",
+          "  pm.collectionVariables.set('baseUrl', 'http://localhost:3000');",
+          "}",
+          "if (!pm.collectionVariables.get('callbackUrl')) {",
+          "  pm.collectionVariables.set('callbackUrl', '/dashboard');",
+          "}"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"QA User\",\n  \"email\": \"{{testEmail}}\",\n  \"password\": \"{{testPassword}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Crea un usuario local por email/password."
+          }
+        },
+        {
+          "name": "Get CSRF Token",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/csrf",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "csrf"
+              ]
+            },
+            "description": "Obtiene CSRF token para login con credenciales."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let data = {};",
+                  "try { data = pm.response.json(); } catch (e) {}",
+                  "if (data.csrfToken) pm.collectionVariables.set('csrfToken', data.csrfToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Sign In (Credentials)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "csrfToken",
+                  "value": "{{csrfToken}}",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "{{testEmail}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{testPassword}}",
+                  "type": "text"
+                },
+                {
+                  "key": "callbackUrl",
+                  "value": "{{callbackUrl}}",
+                  "type": "text"
+                },
+                {
+                  "key": "json",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signin/credentials",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signin",
+                "credentials"
+              ]
+            },
+            "description": "Inicia sesion y deja cookie de sesion en Postman cookie jar."
+          }
+        },
+        {
+          "name": "Session",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/session",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "session"
+              ]
+            },
+            "description": "Verifica sesion activa."
+          }
+        },
+        {
+          "name": "Providers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/providers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "providers"
+              ]
+            },
+            "description": "Lista providers de auth disponibles."
+          }
+        },
+        {
+          "name": "Sign Out",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "csrfToken",
+                  "value": "{{csrfToken}}",
+                  "type": "text"
+                },
+                {
+                  "key": "json",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "signout"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Entries",
+      "item": [
+        {
+          "name": "List Entries",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/entries",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entries"
+              ]
+            },
+            "description": "Requiere sesion."
+          }
+        },
+        {
+          "name": "Create Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2026-05-12\",\n  \"startTime\": \"07:00\",\n  \"endTime\": \"12:30\",\n  \"skipper\": \"QA Skipper\",\n  \"method\": \"hookah\",\n  \"area\": \"Zona QA\",\n  \"species\": \"Vieira\",\n  \"catches\": [\n    {\n      \"id\": \"vieira-tehuelche\",\n      \"commonName\": \"Vieira Tehuelche\",\n      \"scientificName\": \"Aequipecten tehuelchus\",\n      \"crates\": \"2\",\n      \"weight\": \"20\"\n    }\n  ],\n  \"sailors\": [\n    {\n      \"name\": \"Marinero QA\",\n      \"divingTime\": \"90\"\n    }\n  ],\n  \"location\": \"Puerto QA\",\n  \"gps\": \"-42.76, -65.03\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/entries",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entries"
+              ]
+            },
+            "description": "Requiere sesion."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "let data = {};",
+                  "try { data = pm.response.json(); } catch (e) {}",
+                  "if (data.id) pm.collectionVariables.set('entryId', data.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Entry by ID",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/entries/{{entryId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entries",
+                "{{entryId}}"
+              ]
+            },
+            "description": "Requiere sesion y entryId valido."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profile"
+              ]
+            },
+            "description": "Requiere sesion."
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"QA User Updated\",\n  \"phoneNumber\": \"+5492804000000\",\n  \"fishingZone\": \"peninsula-valdes\",\n  \"yearsOfExperience\": 7,\n  \"boatName\": \"Lancha QA\",\n  \"documentId\": \"12345678\",\n  \"bio\": \"Prueba de QA\",\n  \"isProfilePublic\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profile"
+              ]
+            },
+            "description": "Requiere sesion."
+          }
+        },
+        {
+          "name": "Upload Profile Photo",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{profileImagePath}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/upload-profile-photo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "upload-profile-photo"
+              ]
+            },
+            "description": "Requiere sesion. Form-data con campo file."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Species",
+      "item": [
+        {
+          "name": "List Species",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/species",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "species"
+              ]
+            },
+            "description": "Requiere sesion en esta version del backend."
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "testEmail",
+      "value": "test@bepa.local"
+    },
+    {
+      "key": "testPassword",
+      "value": "Test1234"
+    },
+    {
+      "key": "callbackUrl",
+      "value": "/dashboard"
+    },
+    {
+      "key": "csrfToken",
+      "value": ""
+    },
+    {
+      "key": "entryId",
+      "value": ""
+    },
+    {
+      "key": "profileImagePath",
+      "value": ""
+    }
+  ]
+}

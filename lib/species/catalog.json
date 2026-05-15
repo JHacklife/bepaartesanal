@@ -1,0 +1,842 @@
+[
+  {
+    "id": "vieira-tehuelche",
+    "commonName": "Vieira tehuelche",
+    "scientificName": "Aequipecten tehuelchus",
+    "category": "molusco",
+    "habitat": [
+      "fondos arenosos",
+      "aguas costeras"
+    ],
+    "averageSize": "8-12 cm",
+    "averageWeight": "0.1-0.3 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "recolección manual"
+    ],
+    "commercialValue": "alta",
+    "description": "Molusco bivalvo de importancia comercial, con concha en forma de abanico.",
+    "minSize": "6 cm",
+    "region": [
+      "patagonia",
+      "península valdés"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Vieira+tehuelche",
+    "identificationTips": [
+      "Concha en forma de abanico",
+      "Color variable de blanco a naranja",
+      "Estrías radiales"
+    ]
+  },
+  {
+    "id": "almeja-blanca",
+    "commonName": "Almeja blanca",
+    "scientificName": "Ameghinomya antiqua",
+    "category": "molusco",
+    "habitat": [
+      "fondos arenosos",
+      "playas"
+    ],
+    "averageSize": "5-10 cm",
+    "averageWeight": "0.05-0.2 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "recolección manual"
+    ],
+    "commercialValue": "media",
+    "description": "Molusco bivalvo de concha blanca, frecuente en playas patagónicas.",
+    "minSize": "5 cm",
+    "region": [
+      "patagonia",
+      "buenos aires"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Almeja+blanca",
+    "identificationTips": [
+      "Concha blanca",
+      "Forma ovalada",
+      "Superficie lisa"
+    ]
+  },
+  {
+    "id": "almeja-navaja",
+    "commonName": "Almeja navaja",
+    "scientificName": "Ensis macha",
+    "category": "molusco",
+    "habitat": [
+      "fondos arenosos",
+      "playas"
+    ],
+    "averageSize": "8-15 cm",
+    "averageWeight": "0.05-0.15 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "recolección manual"
+    ],
+    "commercialValue": "media",
+    "description": "Molusco bivalvo de concha alargada, parecido a una navaja.",
+    "minSize": "7 cm",
+    "region": [
+      "patagonia",
+      "buenos aires"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Almeja+navaja",
+    "identificationTips": [
+      "Concha alargada",
+      "Forma de navaja",
+      "Color beige"
+    ]
+  },
+  {
+    "id": "almeja-panopea",
+    "commonName": "Almeja panopea",
+    "scientificName": "Panopea abbreviata",
+    "category": "molusco",
+    "habitat": [
+      "fondos arenosos",
+      "aguas profundas"
+    ],
+    "averageSize": "15-25 cm",
+    "averageWeight": "0.3-1 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "buceo"
+    ],
+    "commercialValue": "alta",
+    "description": "Molusco bivalvo de gran tamaño, con sifón prominente.",
+    "minSize": "12 cm",
+    "region": [
+      "patagonia",
+      "golfo san jorge"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Almeja+panopea",
+    "identificationTips": [
+      "Concha grande",
+      "Sifón prominente",
+      "Color beige"
+    ]
+  },
+  {
+    "id": "cangrejo-nadador",
+    "commonName": "Cangrejo nadador",
+    "scientificName": "Ovalipes trimaculatus",
+    "category": "crustaceo",
+    "habitat": [
+      "fondos arenosos",
+      "aguas costeras"
+    ],
+    "averageSize": "5-8 cm",
+    "averageWeight": "0.03-0.1 kg",
+    "season": [
+      "octubre-marzo"
+    ],
+    "fishingMethod": [
+      "recolección manual"
+    ],
+    "commercialValue": "media",
+    "description": "Cangrejo de color claro, con manchas oscuras y patas adaptadas para nadar.",
+    "minSize": "4 cm",
+    "region": [
+      "patagonia",
+      "buenos aires"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Cangrejo+nadador",
+    "identificationTips": [
+      "Patas traseras aplanadas",
+      "Tres manchas oscuras en el caparazón"
+    ]
+  },
+  {
+    "id": "cangrejo-pinzas-negras",
+    "commonName": "Cangrejo pinzas negras",
+    "scientificName": "Danielethus patagonicus",
+    "category": "crustaceo",
+    "habitat": [
+      "rocas",
+      "fondos arenosos"
+    ],
+    "averageSize": "4-7 cm",
+    "averageWeight": "0.02-0.08 kg",
+    "season": [
+      "octubre-marzo"
+    ],
+    "fishingMethod": [
+      "recolección manual"
+    ],
+    "commercialValue": "media",
+    "description": "Cangrejo pequeño con pinzas negras, común en la costa patagónica.",
+    "minSize": "3 cm",
+    "region": [
+      "patagonia",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Cangrejo+pinzas+negras",
+    "identificationTips": [
+      "Pinzas negras",
+      "Caparazón redondeado",
+      "Color marrón"
+    ]
+  },
+  {
+    "id": "alga-undaria",
+    "commonName": "Alga Undaria",
+    "scientificName": "Undaria pinnatífida",
+    "category": "alga",
+    "habitat": [
+      "rocas",
+      "intermareales"
+    ],
+    "averageSize": "30-100 cm",
+    "averageWeight": "0.1-2 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "recolección manual"
+    ],
+    "commercialValue": "media",
+    "description": "Alga invasora de gran tamaño, utilizada en gastronomía asiática.",
+    "region": [
+      "patagonia",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Undaria",
+    "identificationTips": [
+      "Frondas largas y ramificadas",
+      "Color verde oliva"
+    ]
+  },
+  {
+    "id": "pulpo-colorado",
+    "commonName": "Pulpo colorado",
+    "scientificName": "Enteroctopus megalocyathus",
+    "category": "molusco",
+    "habitat": [
+      "fondos rocosos",
+      "cuevas"
+    ],
+    "averageSize": "30-60 cm",
+    "averageWeight": "0.5-3 kg",
+    "season": [
+      "marzo-noviembre"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "nasas"
+    ],
+    "commercialValue": "alta",
+    "description": "Cefalópodo de gran tamaño y color rojizo, muy apreciado gastronómicamente.",
+    "minSize": "500 g",
+    "region": [
+      "patagonia",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Pulpo+colorado",
+    "identificationTips": [
+      "Color rojizo intenso",
+      "Ocho brazos largos",
+      "Cabeza grande"
+    ]
+  },
+  {
+    "id": "merluza-comun",
+    "commonName": "Merluza Común",
+    "scientificName": "Merluccius hubbsi",
+    "category": "pez",
+    "habitat": [
+      "plataforma continental",
+      "aguas profundas"
+    ],
+    "averageSize": "30-60 cm",
+    "averageWeight": "0.5-3 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "red de arrastre",
+      "red de enmalle",
+      "línea"
+    ],
+    "commercialValue": "alta",
+    "description": "Especie de gran importancia comercial en Argentina. Habita aguas frías de la plataforma continental.",
+    "minSize": "35 cm",
+    "region": [
+      "golfo san jorge",
+      "península valdés",
+      "comodoro rivadavia"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Merluza+Común+fish+silver+elongated+body+large+mouth",
+    "identificationTips": [
+      "Cuerpo alargado y plateado",
+      "Boca grande con dientes prominentes",
+      "Dos aletas dorsales separadas",
+      "Línea lateral bien marcada",
+      "Cola ligeramente bifurcada"
+    ],
+    "keyDifferences": [
+      "Dos aletas dorsales claramente separadas",
+      "Dientes más pequeños que merluza negra",
+      "Color plateado brillante",
+      "Tamaño menor que merluza negra"
+    ],
+    "similarSpecies": [
+      "merluza-negra",
+      "abadejo"
+    ]
+  },
+  {
+    "id": "merluza-negra",
+    "commonName": "Merluza Negra",
+    "scientificName": "Dissostichus eleginoides",
+    "category": "pez",
+    "habitat": [
+      "aguas profundas",
+      "talud continental"
+    ],
+    "averageSize": "60-150 cm",
+    "averageWeight": "5-50 kg",
+    "season": [
+      "marzo-septiembre"
+    ],
+    "fishingMethod": [
+      "palangre",
+      "red de arrastre"
+    ],
+    "commercialValue": "alta",
+    "description": "Pez de aguas profundas de alto valor comercial. Requiere permisos especiales para su captura.",
+    "minSize": "60 cm",
+    "region": [
+      "comodoro rivadavia",
+      "golfo san jorge"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Merluza+Negra+dark+fish+large+deep+water+elongated",
+    "identificationTips": [
+      "Cuerpo robusto de color gris oscuro a negro",
+      "Cabeza grande con boca amplia",
+      "Escamas pequeñas y adherentes",
+      "Aletas dorsales continuas",
+      "Puede alcanzar gran tamaño"
+    ]
+  },
+  {
+    "id": "abadejo",
+    "commonName": "Abadejo",
+    "scientificName": "Genypterus blacodes",
+    "category": "pez",
+    "habitat": [
+      "fondos rocosos",
+      "plataforma continental"
+    ],
+    "averageSize": "40-80 cm",
+    "averageWeight": "1-5 kg",
+    "season": [
+      "abril-octubre"
+    ],
+    "fishingMethod": [
+      "línea",
+      "red de enmalle"
+    ],
+    "commercialValue": "alta",
+    "description": "Pez de fondo de carne blanca muy apreciada. Común en fondos rocosos.",
+    "minSize": "40 cm",
+    "region": [
+      "península valdés",
+      "golfo san jorge"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Abadejo+fish+elongated+brown+mottled+pattern+bottom+dweller",
+    "identificationTips": [
+      "Cuerpo alargado tipo anguila",
+      "Color marrón con manchas irregulares",
+      "Aleta dorsal muy larga",
+      "Barbilla prominente en el mentón",
+      "Piel lisa sin escamas visibles"
+    ]
+  },
+  {
+    "id": "mero",
+    "commonName": "Mero",
+    "scientificName": "Acanthistius patachonicus",
+    "category": "pez",
+    "habitat": [
+      "fondos rocosos",
+      "arrecifes"
+    ],
+    "averageSize": "30-70 cm",
+    "averageWeight": "1-8 kg",
+    "season": [
+      "noviembre-abril"
+    ],
+    "fishingMethod": [
+      "línea",
+      "buceo"
+    ],
+    "commercialValue": "alta",
+    "description": "Pez de roca de gran valor gastronómico. Habita fondos rocosos y arrecifes.",
+    "minSize": "35 cm",
+    "region": [
+      "península valdés",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Mero+grouper+fish+robust+mottled+brown+large+mouth+rock+fish",
+    "identificationTips": [
+      "Cuerpo robusto y comprimido",
+      "Color marrón con bandas oscuras",
+      "Boca muy grande",
+      "Aleta dorsal con espinas fuertes",
+      "Ojos grandes y prominentes"
+    ]
+  },
+  {
+    "id": "lenguado",
+    "commonName": "Lenguado",
+    "scientificName": "Paralichthys orbignyanus",
+    "category": "pez",
+    "habitat": [
+      "fondos arenosos",
+      "aguas costeras"
+    ],
+    "averageSize": "25-50 cm",
+    "averageWeight": "0.3-2 kg",
+    "season": [
+      "octubre-marzo"
+    ],
+    "fishingMethod": [
+      "red de arrastre",
+      "red de enmalle"
+    ],
+    "commercialValue": "alta",
+    "description": "Pez plano de fondos arenosos. Muy apreciado gastronómicamente.",
+    "minSize": "25 cm",
+    "region": [
+      "península valdés",
+      "golfo san matías"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Lenguado+flatfish+flounder+brown+sandy+both+eyes+one+side",
+    "identificationTips": [
+      "Cuerpo completamente plano",
+      "Ambos ojos en el lado superior",
+      "Color marrón que imita la arena",
+      "Capacidad de cambiar de color",
+      "Boca torcida hacia un lado"
+    ]
+  },
+  {
+    "id": "anchoa",
+    "commonName": "Anchoíta",
+    "scientificName": "Engraulis anchoita",
+    "category": "pez",
+    "habitat": [
+      "aguas pelágicas",
+      "costa"
+    ],
+    "averageSize": "8-15 cm",
+    "averageWeight": "0.01-0.05 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "red de cerco",
+      "red de arrastre"
+    ],
+    "commercialValue": "media",
+    "description": "Pez pelágico pequeño, base de la cadena alimentaria marina. Importante para la industria conservera.",
+    "region": [
+      "golfo san jorge",
+      "península valdés"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Anchoita+small+silver+fish+school+anchovy+slender+body",
+    "identificationTips": [
+      "Pez pequeño y plateado",
+      "Cuerpo fusiforme y comprimido",
+      "Boca inferior prominente",
+      "Forma cardúmenes densos",
+      "Aleta caudal bifurcada"
+    ]
+  },
+  {
+    "id": "corvina-rubia",
+    "commonName": "Corvina Rubia",
+    "scientificName": "Micropogonias furnieri",
+    "category": "pez",
+    "habitat": [
+      "aguas costeras",
+      "estuarios"
+    ],
+    "averageSize": "30-60 cm",
+    "averageWeight": "0.5-4 kg",
+    "season": [
+      "octubre-abril"
+    ],
+    "fishingMethod": [
+      "línea",
+      "red de enmalle"
+    ],
+    "commercialValue": "alta",
+    "description": "Pez costero muy apreciado por pescadores deportivos y comerciales.",
+    "minSize": "35 cm",
+    "region": [
+      "península valdés",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Corvina+Rubia+golden+fish+robust+body+coastal+drum+fish",
+    "identificationTips": [
+      "Color dorado a amarillento",
+      "Cuerpo robusto y comprimido",
+      "Boca inferior con barbillas",
+      "Aleta dorsal con espinas",
+      "Escamas grandes y visibles"
+    ]
+  },
+  {
+    "id": "pulpo-comun",
+    "commonName": "Pulpo Común",
+    "scientificName": "Octopus tehuelchus",
+    "category": "molusco",
+    "habitat": [
+      "fondos rocosos",
+      "cuevas"
+    ],
+    "averageSize": "30-60 cm",
+    "averageWeight": "0.5-3 kg",
+    "season": [
+      "marzo-noviembre"
+    ],
+    "fishingMethod": [
+      "buceo libre",
+      "buceo con aire comprimido",
+      "nasas"
+    ],
+    "commercialValue": "alta",
+    "description": "Cefalópodo muy apreciado gastronómicamente. Habita cuevas y grietas rocosas.",
+    "minSize": "500 g",
+    "region": [
+      "península valdés",
+      "comodoro rivadavia",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Pulpo+octopus+eight+arms+suction+cups+reddish+brown+tentacles",
+    "identificationTips": [
+      "Ocho brazos con ventosas",
+      "Color variable (rojo, marrón, gris)",
+      "Cabeza bulbosa con ojos grandes",
+      "Capacidad de cambiar color y textura",
+      "Se esconde en grietas rocosas"
+    ]
+  },
+  {
+    "id": "calamar-illex",
+    "commonName": "Calamar Illex",
+    "scientificName": "Illex argentinus",
+    "category": "molusco",
+    "habitat": [
+      "aguas pelágicas",
+      "plataforma continental"
+    ],
+    "averageSize": "15-35 cm",
+    "averageWeight": "0.1-0.8 kg",
+    "season": [
+      "febrero-julio"
+    ],
+    "fishingMethod": [
+      "jigger",
+      "red de arrastre"
+    ],
+    "commercialValue": "alta",
+    "description": "Calamar de gran importancia comercial. Forma cardúmenes en aguas abiertas.",
+    "region": [
+      "golfo san jorge",
+      "península valdés"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Calamar+squid+elongated+body+ten+tentacles+fins+translucent",
+    "identificationTips": [
+      "Cuerpo alargado y translúcido",
+      "Diez tentáculos (8 brazos + 2 largos)",
+      "Aletas triangulares en la parte posterior",
+      "Color rosado a transparente",
+      "Ojos grandes y prominentes"
+    ]
+  },
+  {
+    "id": "mejillon",
+    "commonName": "Mejillón",
+    "scientificName": "Mytilus edulis platensis",
+    "category": "molusco",
+    "habitat": [
+      "intermareales",
+      "rocas",
+      "muelles"
+    ],
+    "averageSize": "5-12 cm",
+    "averageWeight": "0.02-0.1 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "recolección manual",
+      "buceo"
+    ],
+    "commercialValue": "media",
+    "description": "Bivalvo filtrador común en costas rocosas. Importante para acuicultura.",
+    "minSize": "5 cm",
+    "region": [
+      "península valdés",
+      "golfo nuevo",
+      "comodoro rivadavia"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Mejillón+mussel+dark+blue+shell+bivalve+attached+rocks",
+    "identificationTips": [
+      "Concha alargada de color azul oscuro",
+      "Forma de lágrima característica",
+      "Se adhiere a rocas con filamentos",
+      "Interior nacarado",
+      "Forma colonias densas"
+    ]
+  },
+  {
+    "id": "cholga",
+    "commonName": "Cholga",
+    "scientificName": "Aulacomya atra",
+    "category": "molusco",
+    "habitat": [
+      "intermareales",
+      "rocas"
+    ],
+    "averageSize": "8-15 cm",
+    "averageWeight": "0.05-0.2 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "recolección manual",
+      "buceo"
+    ],
+    "commercialValue": "media",
+    "description": "Bivalvo de concha negra, común en costas patagónicas.",
+    "minSize": "6 cm",
+    "region": [
+      "península valdés",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Cholga+black+mussel+ribbed+shell+bivalve+rocky+shore",
+    "identificationTips": [
+      "Concha negra con estrías radiales",
+      "Más grande que el mejillón común",
+      "Forma más redondeada",
+      "Superficie rugosa",
+      "Interior blanco nacarado"
+    ]
+  },
+  {
+    "id": "vieira-patagonica",
+    "commonName": "Vieira Patagónica",
+    "scientificName": "Zygochlamys patagonica",
+    "category": "molusco",
+    "habitat": [
+      "fondos arenosos",
+      "aguas profundas"
+    ],
+    "averageSize": "8-12 cm",
+    "averageWeight": "0.1-0.3 kg",
+    "season": [
+      "marzo-octubre"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "draga"
+    ],
+    "commercialValue": "alta",
+    "description": "Bivalvo de alto valor comercial. Habita fondos arenosos de aguas frías.",
+    "minSize": "5.5 cm",
+    "region": [
+      "golfo san jorge",
+      "península valdés"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Vieira+scallop+fan+shaped+shell+ridged+orange+white",
+    "identificationTips": [
+      "Concha en forma de abanico",
+      "Estrías radiales pronunciadas",
+      "Color naranja a rojizo",
+      "Valva superior más convexa",
+      "Orejas laterales características"
+    ]
+  },
+  {
+    "id": "centolla",
+    "commonName": "Centolla",
+    "scientificName": "Lithodes santolla",
+    "category": "crustaceo",
+    "habitat": [
+      "fondos rocosos",
+      "aguas frías"
+    ],
+    "averageSize": "15-25 cm",
+    "averageWeight": "1-4 kg",
+    "season": [
+      "diciembre-julio"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "nasas"
+    ],
+    "commercialValue": "alta",
+    "description": "Crustáceo de alto valor comercial. Habita aguas frías del sur de Argentina.",
+    "minSize": "12 cm caparazón",
+    "region": [
+      "canal beagle",
+      "estrecho de magallanes"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Centolla+king+crab+spiny+red+orange+large+claws+carapace",
+    "identificationTips": [
+      "Caparazón espinoso de color rojo-naranja",
+      "Patas largas y robustas",
+      "Pinzas grandes y asimétricas",
+      "Abdomen plegado bajo el cuerpo",
+      "Espinas prominentes en el caparazón"
+    ]
+  },
+  {
+    "id": "centollon",
+    "commonName": "Centollón",
+    "scientificName": "Paralomis granulosa",
+    "category": "crustaceo",
+    "habitat": [
+      "fondos rocosos",
+      "aguas profundas"
+    ],
+    "averageSize": "12-20 cm",
+    "averageWeight": "0.8-2.5 kg",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "nasas"
+    ],
+    "commercialValue": "alta",
+    "description": "Crustáceo similar a la centolla pero de menor tamaño. Muy apreciado gastronómicamente.",
+    "minSize": "10 cm caparazón",
+    "region": [
+      "comodoro rivadavia",
+      "golfo san jorge"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Centollón+false+king+crab+granular+texture+smaller+spines",
+    "identificationTips": [
+      "Similar a centolla pero más pequeño",
+      "Caparazón con textura granular",
+      "Espinas menos pronunciadas",
+      "Color más apagado",
+      "Patas proporcionalmente más cortas"
+    ]
+  },
+  {
+    "id": "langostino",
+    "commonName": "Langostino Patagónico",
+    "scientificName": "Pleoticus muelleri",
+    "category": "crustaceo",
+    "habitat": [
+      "fondos fangosos",
+      "plataforma continental"
+    ],
+    "averageSize": "8-15 cm",
+    "averageWeight": "0.02-0.08 kg",
+    "season": [
+      "enero-mayo",
+      "septiembre-diciembre"
+    ],
+    "fishingMethod": [
+      "red de arrastre",
+      "nasas"
+    ],
+    "commercialValue": "alta",
+    "description": "Crustáceo de gran importancia comercial en Argentina. Habita fondos blandos.",
+    "minSize": "3.5 cm caparazón",
+    "region": [
+      "golfo san jorge",
+      "península valdés"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Langostino+shrimp+curved+body+long+antennae+translucent+pink",
+    "identificationTips": [
+      "Cuerpo curvado característico",
+      "Color rosado translúcido",
+      "Antenas muy largas",
+      "Rostro dentado",
+      "Pleópodos natatorios visibles"
+    ]
+  },
+  {
+    "id": "erizo-rojo",
+    "commonName": "Erizo Rojo",
+    "scientificName": "Loxechinus albus",
+    "category": "equinodermo",
+    "habitat": [
+      "fondos rocosos",
+      "bosques de algas"
+    ],
+    "averageSize": "6-12 cm",
+    "averageWeight": "0.1-0.4 kg",
+    "season": [
+      "marzo-agosto"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "recolección manual"
+    ],
+    "commercialValue": "media",
+    "description": "Equinodermo apreciado por sus gónadas. Habita fondos rocosos.",
+    "minSize": "6 cm",
+    "region": [
+      "península valdés",
+      "golfo nuevo"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Erizo+sea+urchin+spiny+red+purple+spherical+spines",
+    "identificationTips": [
+      "Forma esférica con espinas",
+      "Color rojo a púrpura",
+      "Espinas móviles y puntiagudas",
+      "Boca en la parte inferior",
+      "Se mueve lentamente por el fondo"
+    ]
+  },
+  {
+    "id": "cachiyuyo",
+    "commonName": "Cachiyuyo",
+    "scientificName": "Macrocystis pyrifera",
+    "category": "alga",
+    "habitat": [
+      "fondos rocosos",
+      "aguas frías"
+    ],
+    "averageSize": "hasta 30 m",
+    "averageWeight": "variable",
+    "season": [
+      "todo el año"
+    ],
+    "fishingMethod": [
+      "buceo",
+      "recolección manual"
+    ],
+    "commercialValue": "baja",
+    "description": "Alga gigante que forma bosques submarinos. Importante para el ecosistema marino.",
+    "region": [
+      "península valdés",
+      "golfo nuevo",
+      "comodoro rivadavia"
+    ],
+    "imageUrl": "/placeholder.svg?height=200&width=300&text=Cachiyuyo+giant+kelp+brown+seaweed+long+fronds+holdfasts",
+    "identificationTips": [
+      "Alga marrón de gran tamaño",
+      "Frondas largas y ondulantes",
+      "Vesículas de flotación",
+      "Se adhiere al fondo rocoso",
+      "Forma bosques submarinos densos"
+    ]
+  }
+]

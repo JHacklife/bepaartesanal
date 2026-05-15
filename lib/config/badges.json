@@ -1,0 +1,125 @@
+﻿{
+  "badges": [
+    {
+      "id": "first-entry",
+      "name": "Primer registro",
+      "description": "Registraste tu primera entrada en la bitácora",
+      "icon": "🎣",
+      "condition": {
+        "type": "total-entries",
+        "value": 1
+      },
+      "rarity": "common"
+    },
+    {
+      "id": "ten-entries",
+      "name": "Dedicado",
+      "description": "Has registrado 10 entradas",
+      "icon": "📚",
+      "condition": {
+        "type": "total-entries",
+        "value": 10
+      },
+      "rarity": "common"
+    },
+    {
+      "id": "fifty-entries",
+      "name": "Experimentado",
+      "description": "Has registrado 50 entradas",
+      "icon": "⭐",
+      "condition": {
+        "type": "total-entries",
+        "value": 50
+      },
+      "rarity": "uncommon"
+    },
+    {
+      "id": "hundred-entries",
+      "name": "Pescador Estrella",
+      "description": "Has registrado 100 entradas en la bitácora",
+      "icon": "✨",
+      "condition": {
+        "type": "total-entries",
+        "value": 100
+      },
+      "rarity": "rare"
+    },
+    {
+      "id": "500kg-catch",
+      "name": "Gran captura",
+      "description": "Alcanzaste 500 kg en una sola entrada",
+      "icon": "🏆",
+      "condition": {
+        "type": "single-entry-weight",
+        "value": 500
+      },
+      "rarity": "rare"
+    },
+    {
+      "id": "1000kg-total",
+      "name": "Cosecha abundante",
+      "description": "Capturaste más de 1000 kg en total",
+      "icon": "🌊",
+      "condition": {
+        "type": "total-weight",
+        "value": 1000
+      },
+      "rarity": "uncommon"
+    },
+    {
+      "id": "vieira-specialist",
+      "name": "Especialista en vieira",
+      "description": "La vieira es tu especie más capturada",
+      "icon": "🐚",
+      "condition": {
+        "type": "favorite-species",
+        "value": "Vieira"
+      },
+      "rarity": "uncommon"
+    },
+    {
+      "id": "diverse-catch",
+      "name": "Cazador versátil",
+      "description": "Capturaste 5 o más especies diferentes",
+      "icon": "🎯",
+      "condition": {
+        "type": "unique-species-count",
+        "value": 5
+      },
+      "rarity": "uncommon"
+    },
+    {
+      "id": "perfect-week",
+      "name": "Semana perfecta",
+      "description": "Registraste entradas en 7 días consecutivos",
+      "icon": "📅",
+      "condition": {
+        "type": "consecutive-days",
+        "value": 7
+      },
+      "rarity": "rare"
+    },
+    {
+      "id": "data-keeper",
+      "name": "Guardián de datos",
+      "description": "Todos tus registros están sincronizados con la base de datos",
+      "icon": "💾",
+      "condition": {
+        "type": "all-entries-synced",
+        "value": true
+      },
+      "rarity": "common"
+    },
+    {
+      "id": "early-adopter",
+      "name": "Pionero",
+      "description": "Fuiste uno de los primeros usuarios de BEPA",
+      "icon": "🚀",
+      "condition": {
+        "type": "registration-date",
+        "value": "early"
+      },
+      "rarity": "legendary"
+    }
+  ]
+}

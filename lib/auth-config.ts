@@ -1,0 +1,4 @@
+﻿export const authSecret =
+  process.env.NEXTAUTH_SECRET ||
+  process.env.AUTH_SECRET ||
+  "dev-only-secret-change-in-production"
