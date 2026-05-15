@@ -22,6 +22,10 @@ const isChunkLoadError = (error: unknown): boolean => {
 }
 
 const shouldAttemptReload = (): boolean => {
+  if (typeof window === "undefined" || typeof sessionStorage === "undefined") {
+    return false
+  }
+
   try {
     const lastReloadAt = Number(sessionStorage.getItem(RELOAD_KEY) || "0")
     const now = Date.now()
@@ -38,6 +42,8 @@ const shouldAttemptReload = (): boolean => {
 }
 
 const reloadWithCacheBuster = () => {
+  if (typeof window === "undefined") return
+
   const nextUrl = new URL(window.location.href)
   nextUrl.searchParams.set("__chunk_retry", Date.now().toString())
   window.location.replace(nextUrl.toString())

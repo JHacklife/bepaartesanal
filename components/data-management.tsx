@@ -60,6 +60,8 @@ const getCatchCrates = (item: unknown) => {
 }
 
 const exportToCSV = (data: unknown[], filename: string) => {
+  if (typeof window === "undefined" || typeof document === "undefined") return
+
   if (data.length === 0) {
     alert("No hay datos para exportar")
     return

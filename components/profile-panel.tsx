@@ -91,6 +91,8 @@ export function ProfilePanel() {
   }, [])
 
   useEffect(() => {
+    if (typeof window === "undefined") return
+
     const syncOnlineState = () => {
       if (typeof navigator !== "undefined") {
         setIsOffline(!navigator.onLine)

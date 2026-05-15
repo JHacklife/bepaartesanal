@@ -311,7 +311,7 @@ export function InteractiveMap() {
   }
 
   const handleLayerChange = (layerName: string) => {
-    if (window.switchMapLayer) {
+    if (typeof window !== "undefined" && window.switchMapLayer) {
       window.switchMapLayer(layerName)
     }
     setShowLayers(false)

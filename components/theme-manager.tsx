@@ -152,6 +152,8 @@ export function useCustomTheme() {
   const [customTheme, setCustomTheme] = React.useState<string>('maritime')
 
   const applyCustomTheme = React.useCallback((themeName: string) => {
+    if (typeof window === 'undefined') return
+
     const selectedTheme = customThemes.find(t => t.name === themeName)
     if (!selectedTheme) return
 

@@ -20,6 +20,8 @@ export function ThemeInitializer() {
 
     // Pequeño delay para asegurar que DOM está completamente listo
     const timer = setTimeout(() => {
+      if (typeof window === 'undefined') return
+
       const savedTheme = localStorage.getItem('custom-theme') || 'maritime'
       applyCustomTheme(savedTheme)
     }, 50)

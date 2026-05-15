@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { MapPin, Clock, Fish, Save, Plus, Minus, Users, Navigation, Map as MapIcon, Pencil, ChevronDown } from "lucide-react"
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps"
+import { useRouter } from "next/navigation"
 import { SpeciesSelector } from "./species-selector"
 import { useWeather } from "@/components/weather-provider"
 import { listFishingEntries, queueFailedFishingEntry, saveFishingEntry } from "@/lib/entries/repository"
@@ -30,6 +31,7 @@ const normalizeText = (value: string) =>
 const PRODUCTION_TRIGGER_TERMS = ["vieira", "viera", "aequipecten", "tehuelchus", "scallop"]
 
 export function LogbookEntry() {
+  const router = useRouter()
   const { weatherSnapshot, refreshWeather, resetWeather } = useWeather()
   const [fishingGear, setFishingGear] = useState("")
   const [currentLocation, setCurrentLocation] = useState("Sin ubicación seleccionada")
@@ -147,7 +149,7 @@ export function LogbookEntry() {
     setCurrentLocation("Obteniendo ubicación...")
     setLocationError("")
 
-    if (!navigator.geolocation) {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
       setLocationError("GPS no disponible en este dispositivo")
       setCurrentLocation("GPS no disponible")
       setLocationSource("No disponible")
@@ -588,7 +590,7 @@ export function LogbookEntry() {
               queueFailedFishingEntry(entry)
             }
 
-            window.location.href = '/mis-datos';
+            router.push('/mis-datos');
           }}>
             <Save className="w-4 h-4 mr-2" />
             Guardar entrada completa (guardar en registro)
