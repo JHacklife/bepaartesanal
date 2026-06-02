@@ -20,8 +20,8 @@ export function useApiError() {
       /** Fallback cuando no hay descripción disponible */
       fallbackMessage = "Ocurrió un error inesperado. Intenta de nuevo.",
     ) => {
-      // ── Log detallado para el programador ──────────────────────────────────
-      console.error("[useApiError]", {
+      // ── Log detallado para el programador (sin elevarlo a error en dev) ───
+      console.warn("[useApiError]", {
         timestamp: new Date().toISOString(),
         raw,
         stack: raw instanceof Error ? raw.stack : undefined,
@@ -74,12 +74,28 @@ export function useApiError() {
       const isJson = contentType.includes("application/json")
 
       if (!response.ok) {
-        const body = isJson
-          ? ((await response.json()) as Partial<ApiErrorBody>)
-          : ({ message: `HTTP ${response.status}` } as Partial<ApiErrorBody>)
+        let body: Partial<ApiErrorBody>
 
-        // Log detallado
-        console.error("[apiFetch] Error de respuesta", {
+        if (isJson) {
+          try {
+            body = (await response.json()) as Partial<ApiErrorBody>
+          } catch {
+            body = {}
+          }
+        } else {
+          body = {}
+        }
+
+        if (!body.title && !body.message) {
+          body = {
+            ...body,
+            title: response.status >= 500 ? "Servicio no disponible" : "No se pudo completar la solicitud",
+            message: `HTTP ${response.status}${response.statusText ? ` - ${response.statusText}` : ""}`,
+          }
+        }
+
+        // Log detallado de error HTTP manejado
+        console.warn("[apiFetch] Error de respuesta", {
           timestamp: new Date().toISOString(),
           url: typeof input === "string" ? input : input.toString(),
           status: response.status,

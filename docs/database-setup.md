@@ -27,18 +27,18 @@ Copia .env.example a .env y completa:
 DATABASE_URL="mysql://USER:PASSWORD@HOST:3306/DB_NAME"
 AUTH_SECRET="SECRETO_LARGO_Y_ALEATORIO"
 AUTH_URL="https://tu-dominio.com"
-NEXT_PUBLIC_STORAGE_PROVIDER="localStorage"
-NEXT_PUBLIC_SPECIES_PROVIDER="catalog"
+NEXT_PUBLIC_STORAGE_PROVIDER="sql"
+NEXT_PUBLIC_SPECIES_PROVIDER="sql"
 
 Compatibilidad (si tu entorno usa nombres legacy de NextAuth):
 
 NEXTAUTH_SECRET="Mismo valor que AUTH_SECRET"
 NEXTAUTH_URL="https://tu-dominio.com"
 
-Cuando la base este lista, cambia los providers a sql:
+Para desarrollo offline puedes usar los providers locales:
 
-NEXT_PUBLIC_STORAGE_PROVIDER="sql"
-NEXT_PUBLIC_SPECIES_PROVIDER="sql"
+NEXT_PUBLIC_STORAGE_PROVIDER="localStorage"
+NEXT_PUBLIC_SPECIES_PROVIDER="catalog"
 
 ## Pasos para crear la base en Hostinger
 
@@ -60,10 +60,11 @@ NEXT_PUBLIC_SPECIES_PROVIDER="sql"
 
 1. Verifica que el plan soporte procesos Node.js persistentes. Si es solo hosting estatico/PHP, las rutas en app/api no van a funcionar.
 2. Instala dependencias en el servidor: npm install
-3. Construye: npm run build
-4. Inicia la app: npm run start
-5. Configura todas las variables de entorno (DATABASE_URL, AUTH_SECRET, AUTH_URL y opcionales).
-6. Si usas proxy o subdominio, asegúrate de que AUTH_URL coincida exactamente con la URL publica.
+3. Verifica variables: npm run check:production
+4. Construye: npm run build:production
+5. Inicia la app: npm run start
+6. Configura todas las variables de entorno (DATABASE_URL, AUTH_SECRET, AUTH_URL y opcionales).
+7. Si usas proxy o subdominio, asegúrate de que AUTH_URL coincida exactamente con la URL publica.
 
 ## Orden sugerido de implementacion
 
@@ -76,4 +77,4 @@ NEXT_PUBLIC_SPECIES_PROVIDER="sql"
 
 ## Nota importante
 
-Mientras no configures la base, la app sigue funcionando con localStorage para entradas y JSON para especies.
+Mientras no configures la base, la app puede funcionar en desarrollo con localStorage para entradas y JSON para especies. En produccion usa SQL para no perder datos entre dispositivos o despliegues.

@@ -10,9 +10,9 @@ import path from "path"
 export const runtime = "nodejs"
 
 const UPLOAD_DIR = "public/uploads/species"
+const UPLOAD_PUBLIC_PATH = "/uploads/species"
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5 MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"]
-const isReadOnlyDeployment = Boolean(process.env.NETLIFY)
 
 const ensureUploadDir = () => {
   const fullPath = path.join(process.cwd(), UPLOAD_DIR)
@@ -71,16 +71,6 @@ export const POST = withApiHandler("POST", "/api/species", async (req: NextReque
   const imageFile = formData.get("image") as File | null
 
   if (imageFile && imageFile.size > 0) {
-    if (isReadOnlyDeployment) {
-      return NextResponse.json(
-        {
-          title: "Subida de archivos no disponible en este entorno",
-          message: "En produccion serverless usa una URL de imagen (campo imageUrl) o integra almacenamiento externo.",
-        },
-        { status: 501 }
-      )
-    }
-
     if (!ALLOWED_TYPES.includes(imageFile.type)) {
       return NextResponse.json(
         { title: "Tipo de archivo no permitido", message: "Solo se permiten JPEG, PNG y WebP" },
@@ -99,7 +89,7 @@ export const POST = withApiHandler("POST", "/api/species", async (req: NextReque
     const filepath = path.join(uploadDir, filename)
     const buffer = await imageFile.arrayBuffer()
     fs.writeFileSync(filepath, Buffer.from(buffer))
-    imageUrl = `/uploads/species/${filename}`
+    imageUrl = `${UPLOAD_PUBLIC_PATH}/${filename}`
   }
 
   if (!imageUrl) {

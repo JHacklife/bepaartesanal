@@ -5,9 +5,9 @@ import fs from "fs"
 import path from "path"
 
 const UPLOAD_DIR = "public/uploads/profiles"
+const UPLOAD_PUBLIC_PATH = "/uploads/profiles"
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"]
-const isReadOnlyDeployment = Boolean(process.env.NETLIFY)
 
 const ensureUploadDir = () => {
   const fullPath = path.join(process.cwd(), UPLOAD_DIR)
@@ -50,16 +50,6 @@ export const POST = withApiHandler("POST", "/api/upload-profile-photo", async (r
       )
     }
 
-    if (isReadOnlyDeployment) {
-      return NextResponse.json(
-        {
-          title: "Subida de archivos no disponible en este entorno",
-          message: "La foto de perfil requiere almacenamiento externo (por ejemplo, S3 o Cloudinary) en produccion serverless.",
-        },
-        { status: 501 }
-      )
-    }
-
     const uploadDir = ensureUploadDir()
     const ext = file.name.split(".").pop()
     const filename = `${session.user.id}-${Date.now()}.${ext}`
@@ -68,7 +58,7 @@ export const POST = withApiHandler("POST", "/api/upload-profile-photo", async (r
     const buffer = await file.arrayBuffer()
     fs.writeFileSync(filepath, Buffer.from(buffer))
 
-    const relativePath = `/uploads/profiles/${filename}`
+    const relativePath = `${UPLOAD_PUBLIC_PATH}/${filename}`
 
     return NextResponse.json(
       {

@@ -36,19 +36,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        const email = typeof credentials?.email === "string" ? credentials.email : ""
+        const password = typeof credentials?.password === "string" ? credentials.password : ""
+
+        if (!email || !password) {
           return null
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email },
         })
 
         if (!user || !user.password) {
           return null
         }
 
-        const passwordMatch = await compare(credentials.password, user.password)
+        const passwordMatch = await compare(password, user.password)
 
         if (!passwordMatch) {
           return null

@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/safe-prisma-generate.cjs && next build",
+    "build:production": "npm run check:production && npm run build",
+    "check:production": "node scripts/validate-production-env.cjs",
     "clean": "node -e \"require('node:fs').rmSync('.next',{ recursive: true, force: true })\"",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
@@ -12,8 +14,9 @@
     "db:studio": "prisma studio",
     "dev:clean": "npm run clean && next dev",
     "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start"
+    "lint": "npm run typecheck",
+    "start": "node scripts/validate-production-env.cjs && next start",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@auth/core": "^0.41.2",
