@@ -75,10 +75,6 @@ if (!hasValue("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY")) {
   warnings.push("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY no esta definido; el selector de mapa de Nueva entrada quedara deshabilitado.")
 }
 
-if (hasValue("GOOGLE_CLIENT_ID") !== hasValue("GOOGLE_CLIENT_SECRET")) {
-  missing.push("GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET deben configurarse juntos")
-}
-
 if (missing.length > 0) {
   console.error("[production-env] Faltan variables requeridas:")
   for (const item of missing) {

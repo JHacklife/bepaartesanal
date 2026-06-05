@@ -24,3 +24,55 @@
  POST /api/auth/callback/credentials 302 in 145ms
  GET /api/auth/session 200 in 24ms
  POST /api/auth/logout 200 in 12ms
+   Reload env: .env
+ ✓ Compiled in 141ms (372 modules)
+   Reload env: .env
+ ✓ Compiled in 69ms (372 modules)
+   Reload env: .env.local
+ ✓ Compiled in 92ms (372 modules)
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 2.9s (979 modules)
+ ✓ Compiled in 587ms (365 modules)
+ GET /auth/signin 200 in 3521ms
+ ✓ Compiled in 238ms (365 modules)
+ ✓ Compiled /_not-found in 366ms (950 modules)
+ GET /auth/signin 404 in 540ms
+ GET /auth/signin 200 in 264ms
+ ✓ Compiled in 174ms (365 modules)
+ GET /auth/signin 200 in 35ms
+ ✓ Compiled in 209ms (365 modules)
+ GET /auth/signin 200 in 31ms
+ ✓ Compiled in 496ms (958 modules)
+ GET /auth/signin 200 in 104ms
+ ✓ Compiled in 319ms (958 modules)
+ GET /auth/signin 200 in 90ms
+ ✓ Compiled in 137ms (362 modules)
+ GET /auth/signin 200 in 32ms
+ ✓ Compiled in 178ms (362 modules)
+ GET /auth/signin 200 in 39ms
+ ✓ Compiled in 177ms (362 modules)
+ GET /auth/signin 200 in 37ms
+ ✓ Compiled in 165ms (362 modules)
+ GET /auth/signin 200 in 32ms
+ ✓ Compiled in 478ms (957 modules)
+ GET /auth/signin 200 in 156ms
+ ✓ Compiled in 174ms (363 modules)
+ GET /auth/signin 200 in 33ms
+ ✓ Compiled in 413ms (957 modules)
+ GET /auth/signin 200 in 139ms
+ ✓ Compiled in 169ms (363 modules)
+ GET /auth/signin 200 in 40ms
+   ▲ Next.js 15.5.15
+   - Local:        http://127.0.0.1:3000
+   - Network:      http://127.0.0.1:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 2s
+   ▲ Next.js 15.5.15
+   - Local:        http://127.0.0.1:3000
+   - Network:      http://127.0.0.1:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 1878ms

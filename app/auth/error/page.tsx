@@ -10,9 +10,6 @@ type AuthErrorPageProps = {
 
 const errorMap: Record<string, string> = {
   AccessDenied: "Se denegó el acceso a tu cuenta.",
-  OAuthSignin: "No se pudo iniciar el flujo con el proveedor OAuth.",
-  OAuthCallback: "Falló la respuesta del proveedor OAuth.",
-  OAuthAccountNotLinked: "Este correo ya está vinculado a otro método de acceso.",
   CredentialsSignin: "Correo o contraseña inválidos.",
   Configuration: "La configuración de autenticación no es válida.",
 }

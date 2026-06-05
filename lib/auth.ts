@@ -1,35 +1,23 @@
 ﻿import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { Prisma } from "@prisma/client"
 import { compare } from "bcryptjs"
-import { getPrismaClient } from "./server/prisma"
+import { getPrismaClient, isDatabaseConfigured } from "./server/prisma"
 import { authSecret } from "./auth-config"
 
-const prisma = getPrismaClient()
+const hasDatabase = isDatabaseConfigured()
+const prisma = hasDatabase ? getPrismaClient() : null
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim()
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim()
-const hasGoogleCredentials = Boolean(googleClientId && googleClientSecret)
-
-if (!hasGoogleCredentials && process.env.NODE_ENV === "production") {
-  console.warn("[auth] Google OAuth deshabilitado: faltan GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET")
+if (!hasDatabase && process.env.NODE_ENV === "production") {
+  console.error("[auth] Base de datos no configurada: falta DATABASE_URL")
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: authSecret,
   trustHost: true,
-  adapter: PrismaAdapter(prisma),
+  ...(prisma ? { adapter: PrismaAdapter(prisma) } : {}),
   providers: [
-    ...(hasGoogleCredentials
-      ? [
-        GoogleProvider({
-          clientId: googleClientId as string,
-          clientSecret: googleClientSecret as string,
-        }),
-      ]
-      : []),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -37,6 +25,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        if (!prisma) {
+          console.error("[auth] Credentials deshabilitado: Prisma no disponible")
+          return null
+        }
+
         const email =
           typeof credentials?.email === "string"
             ? credentials.email.trim().toLowerCase()
