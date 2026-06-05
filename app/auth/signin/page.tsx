@@ -1,6 +1,6 @@
 ﻿"use client"
 
-import { Suspense, useMemo, useState } from "react"
+import { Suspense, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
@@ -20,7 +20,6 @@ const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || "0.0.0"
 function SignInContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"
   const authError = searchParams.get("error")
 
   const [email, setEmail] = useState("")
@@ -28,6 +27,29 @@ function SignInContent() {
   const [showPassword, setShowPassword] = useState(false)
   const [isCredentialsLoading, setIsCredentialsLoading] = useState(false)
   const [localError, setLocalError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let active = true
+
+    const redirectIfAuthenticated = async () => {
+      try {
+        const res = await fetch("/api/auth/session", { cache: "no-store" })
+        if (!res.ok) return
+        const session = await res.json()
+        if (active && session?.user) {
+          router.replace("/dashboard")
+        }
+      } catch {
+        // Si falla la comprobacion, permitimos continuar con el formulario.
+      }
+    }
+
+    redirectIfAuthenticated()
+
+    return () => {
+      active = false
+    }
+  }, [router])
 
   const readableError = useMemo(() => {
     if (!authError) return null
@@ -43,7 +65,7 @@ function SignInContent() {
       email,
       password,
       redirect: false,
-      callbackUrl,
+      callbackUrl: "/dashboard",
     })
 
     setIsCredentialsLoading(false)
@@ -53,7 +75,7 @@ function SignInContent() {
       return
     }
 
-    router.push(result?.url || callbackUrl)
+    router.push("/dashboard")
   }
 
   return (
@@ -137,7 +159,7 @@ function SignInContent() {
             <p className="text-center text-xs text-[hsl(var(--muted-foreground))]">
               ¿No tienes cuenta?{" "}
               <Link
-                href={`/auth/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                href="/auth/signup"
                 className="font-semibold text-[hsl(var(--primary))] underline decoration-[hsl(var(--primary)/0.45)] underline-offset-4 hover:text-[hsl(var(--primary)/0.8)]"
               >
                 Regístrate aquí

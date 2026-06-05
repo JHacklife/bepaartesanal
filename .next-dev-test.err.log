@@ -104,3 +104,6 @@
 <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\.next\cache\webpack\client-development\0.pack.gz_' -> 'X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\.next\cache\webpack\client-development\0.pack.gz'
  ⚠ Found a change in next.config.mjs. Restarting the server to apply the changes...
  ⚠ Found a change in next.config.mjs. Restarting the server to apply the changes...
+<w> [webpack.cache.PackFileCacheStrategy] Restoring pack failed from X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\.next\cache\webpack\server-development.pack.gz: Error: unexpected end of file
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\.next\cache\webpack\client-development\4.pack.gz_' -> 'X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\.next\cache\webpack\client-development\4.pack.gz'

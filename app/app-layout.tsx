@@ -48,6 +48,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           const sessionName = sessionData?.user?.name
           const sessionEmail = sessionData?.user?.email
           const sessionImage = sessionData?.user?.image
+          if (!sessionData?.user) {
+            window.location.replace("/auth/signin")
+            return
+          }
           if (typeof sessionName === "string" && sessionName.trim().length > 0) {
             setDisplayName(sessionName.trim())
           } else if (typeof sessionEmail === "string" && sessionEmail.includes("@")) {
@@ -56,6 +60,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           if (typeof sessionImage === "string" && sessionImage.trim().length > 0) {
             setAvatarUrl(sessionImage)
           }
+        } else {
+          window.location.replace("/auth/signin")
+          return
         }
 
         const res = await fetch("/api/profile", {

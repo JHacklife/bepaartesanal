@@ -28,17 +28,15 @@ DATABASE_URL="mysql://USER:PASSWORD@HOST:3306/DB_NAME"
 AUTH_SECRET="SECRETO_LARGO_Y_ALEATORIO"
 AUTH_URL="https://tu-dominio.com"
 NEXT_PUBLIC_STORAGE_PROVIDER="sql"
-NEXT_PUBLIC_SPECIES_PROVIDER="sql"
 
 Compatibilidad (si tu entorno usa nombres legacy de NextAuth):
 
 NEXTAUTH_SECRET="Mismo valor que AUTH_SECRET"
 NEXTAUTH_URL="https://tu-dominio.com"
 
-Para desarrollo offline puedes usar los providers locales:
+Para desarrollo offline puedes usar almacenamiento local para entradas:
 
 NEXT_PUBLIC_STORAGE_PROVIDER="localStorage"
-NEXT_PUBLIC_SPECIES_PROVIDER="catalog"
 
 ## Pasos para crear la base en Hostinger
 

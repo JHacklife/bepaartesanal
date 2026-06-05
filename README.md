@@ -27,7 +27,6 @@ En produccion se recomienda:
 
 ```env
 NEXT_PUBLIC_STORAGE_PROVIDER="sql"
-NEXT_PUBLIC_SPECIES_PROVIDER="sql"
 ```
 
 ## Verificacion

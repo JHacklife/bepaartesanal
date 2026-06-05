@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Search, Fish, Plus, Eye, ArrowLeftRight, PlusCircle } from "lucide-react"
+import { Search, Fish, Plus, Eye, ArrowLeftRight } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -115,13 +115,22 @@ export function SpeciesDatabase({ onSelectSpecies, selectedSpecies = [] }: Speci
     { value: "alga", label: "Algas" },
   ]
 
-  const regions = [
-    { value: "all", label: "Todas las regiones" },
-    { value: "península valdés", label: "Península Valdés" },
-    { value: "comodoro rivadavia", label: "Comodoro Rivadavia" },
-    { value: "golfo san jorge", label: "Golfo San Jorge" },
-    { value: "golfo nuevo", label: "Golfo Nuevo" },
-  ]
+  const regions = useMemo(() => {
+    const uniqueRegions = new Set<string>()
+
+    for (const species of speciesList) {
+      for (const region of species.region) {
+        uniqueRegions.add(region)
+      }
+    }
+
+    return [
+      { value: "all", label: "Todas las regiones" },
+      ...Array.from(uniqueRegions)
+        .sort((a, b) => a.localeCompare(b, "es"))
+        .map((region) => ({ value: region, label: region })),
+    ]
+  }, [speciesList])
 
   const getCategoryColor = (category: string) => {
     const colors = {

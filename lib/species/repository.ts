@@ -1,17 +1,4 @@
-﻿import { speciesCatalog } from "./catalog"
-import type { Species } from "./types"
-
-type SpeciesProvider = "catalog" | "sql"
-
-const getConfiguredSpeciesProvider = (): SpeciesProvider => {
-  const provider = (process.env.NEXT_PUBLIC_SPECIES_PROVIDER || "catalog").toLowerCase()
-
-  if (provider === "sql") {
-    return "sql"
-  }
-
-  return "catalog"
-}
+﻿import type { Species } from "./types"
 
 export interface SpeciesRepository {
   list(): Promise<Species[]>
@@ -30,12 +17,6 @@ const getErrorMessage = async (response: Response, fallbackMessage: string) => {
   return fallbackMessage
 }
 
-class CatalogSpeciesRepository implements SpeciesRepository {
-  async list(): Promise<Species[]> {
-    return speciesCatalog
-  }
-}
-
 class SqlSpeciesRepository implements SpeciesRepository {
   async list(): Promise<Species[]> {
     const response = await fetch("/api/species", {
@@ -50,28 +31,6 @@ class SqlSpeciesRepository implements SpeciesRepository {
   }
 }
 
-class UnsupportedSpeciesRepository implements SpeciesRepository {
-  constructor(private readonly providerName: Exclude<SpeciesProvider, "catalog">) { }
-
-  async list(): Promise<Species[]> {
-    throw new Error(`El proveedor ${this.providerName} no esta implementado aun.`)
-  }
-}
-
-const createSpeciesRepository = (): SpeciesRepository => {
-  const provider = getConfiguredSpeciesProvider()
-
-  if (provider === "catalog") {
-    return new CatalogSpeciesRepository()
-  }
-
-  if (provider === "sql") {
-    return new SqlSpeciesRepository()
-  }
-
-  return new UnsupportedSpeciesRepository(provider)
-}
-
-export const speciesRepository = createSpeciesRepository()
+export const speciesRepository: SpeciesRepository = new SqlSpeciesRepository()
 
 export const listSpecies = async (): Promise<Species[]> => speciesRepository.list()

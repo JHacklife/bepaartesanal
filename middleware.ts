@@ -5,7 +5,7 @@ import { isPrivateRoute } from "@/lib/route-access"
 import { authSecret } from "@/lib/auth-config"
 
 export default async function middleware(req: NextRequest) {
-  const { pathname, search } = req.nextUrl
+  const { pathname } = req.nextUrl
 
   if (
     pathname.startsWith("/_next/static") ||
@@ -28,9 +28,7 @@ export default async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: authSecret })
 
   if (!token) {
-    const signInUrl = new URL("/auth/signin", req.url)
-    signInUrl.searchParams.set("callbackUrl", `${pathname}${search}`)
-    return NextResponse.redirect(signInUrl)
+    return NextResponse.redirect(new URL("/auth/signin", req.url))
   }
 
   return NextResponse.next()

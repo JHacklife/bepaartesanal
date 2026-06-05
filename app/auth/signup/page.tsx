@@ -1,8 +1,8 @@
 ﻿"use client"
 
-import { Suspense, useMemo, useState } from "react"
+import { Suspense, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -17,12 +17,33 @@ import { useApiError } from "@/hooks/use-api-error"
 
 function SignUpContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"
 
   const { handleApiError, apiFetch } = useApiError()
 
   const [showPasswords, setShowPasswords] = useState(false)
+
+  useEffect(() => {
+    let active = true
+
+    const redirectIfAuthenticated = async () => {
+      try {
+        const res = await fetch("/api/auth/session", { cache: "no-store" })
+        if (!res.ok) return
+        const session = await res.json()
+        if (active && session?.user) {
+          router.replace("/dashboard")
+        }
+      } catch {
+        // Si falla la comprobacion, permitimos completar el registro.
+      }
+    }
+
+    redirectIfAuthenticated()
+
+    return () => {
+      active = false
+    }
+  }, [router])
 
   const {
     register,
@@ -73,16 +94,16 @@ function SignUpContent() {
     const loginResult = await signIn("credentials", {
       email: values.email,
       password: values.password,
-      callbackUrl,
+      callbackUrl: "/dashboard",
       redirect: false,
     })
 
     if (loginResult?.error) {
-      router.push(`/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`)
+      router.push("/auth/signin")
       return
     }
 
-    router.push(loginResult?.url || callbackUrl)
+    router.push("/dashboard")
   }
 
   return (
@@ -207,7 +228,7 @@ function SignUpContent() {
           <p className="text-center text-xs text-muted-foreground">
             ¿Ya tienes cuenta?{" "}
             <Link
-              href={`/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+              href="/auth/signin"
               className="underline underline-offset-4"
             >
               Iniciar sesión

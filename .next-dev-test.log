@@ -76,3 +76,104 @@
 
  ✓ Starting...
  ✓ Ready in 1878ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 545ms (177 modules)
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 4.3s (974 modules)
+ ✓ Compiled in 609ms (362 modules)
+ GET /auth/signin 200 in 4931ms
+ GET /auth/signin 200 in 72ms
+ GET /auth/signin 200 in 60ms
+ GET /auth/signin 200 in 65ms
+ GET /auth/signin 200 in 68ms
+ GET /auth/signin 200 in 81ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 914ms (1086 modules)
+ GET /api/auth/providers 200 in 1666ms
+ GET /api/auth/csrf 200 in 23ms
+ POST /api/auth/callback/credentials? 200 in 936ms
+ ✓ Compiled in 681ms (957 modules)
+ ✓ Compiled in 200ms (363 modules)
+ ✓ Compiled in 308ms (540 modules)
+ ✓ Compiled in 561ms (957 modules)
+ ✓ Compiled in 352ms (957 modules)
+ ✓ Compiled in 200ms (363 modules)
+ ✓ Compiled in 234ms (540 modules)
+ ✓ Compiled in 203ms (363 modules)
+ ✓ Compiled in 819ms (1134 modules)
+ GET /auth/signin 200 in 354ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 621ms (737 modules)
+ GET /api/auth/session 200 in 813ms
+ ✓ Compiled /dashboard in 487ms (1128 modules)
+ GET /dashboard 200 in 626ms
+ GET /auth/signin 200 in 270ms
+ GET /api/auth/session 200 in 87ms
+ GET /dashboard 200 in 22ms
+ GET /api/auth/session 200 in 30ms
+ ○ Compiling /api/profile ...
+ ✓ Compiled /api/profile in 576ms (1124 modules)
+ GET /api/entries 200 in 972ms
+ GET /api/profile 200 in 931ms
+ GET /api/entries 200 in 985ms
+ GET /api/entries 200 in 68ms
+ GET /api/entries 200 in 118ms
+ ✓ Compiled /api/auth/logout in 260ms (1126 modules)
+ POST /api/auth/logout 200 in 304ms
+ GET /auth/signin 200 in 300ms
+ GET /api/auth/session 200 in 51ms
+ GET /api/auth/providers 200 in 33ms
+ GET /api/auth/csrf 200 in 12ms
+ POST /api/auth/callback/credentials? 200 in 387ms
+ GET /dashboard 200 in 33ms
+ GET /api/auth/session 200 in 37ms
+ GET /api/entries 200 in 98ms
+ GET /api/entries 200 in 105ms
+ GET /api/profile 200 in 112ms
+ GET /api/entries 200 in 72ms
+ GET /api/entries 200 in 74ms
+ POST /api/auth/logout 200 in 14ms
+ GET /auth/signin 200 in 64ms
+ GET /api/auth/session 200 in 20ms
+ GET /api/auth/providers 200 in 17ms
+ GET /api/auth/csrf 200 in 12ms
+ POST /api/auth/callback/credentials? 200 in 367ms
+ GET /dashboard 200 in 24ms
+ GET /api/auth/session 200 in 42ms
+ GET /api/entries 200 in 90ms
+ GET /api/entries 200 in 134ms
+ GET /api/profile 200 in 110ms
+ GET /api/entries 200 in 64ms
+ GET /api/entries 200 in 71ms
+ ○ Compiling /guia-especies ...
+ ✓ Compiled /guia-especies in 1228ms (1304 modules)
+ GET /guia-especies 200 in 1337ms
+ GET /guia-especies 200 in 38ms
+ GET /guia-especies 200 in 21ms
+ ✓ Compiled in 832ms (1155 modules)
+ GET /guia-especies 200 in 209ms
+ ✓ Compiled /api/species in 380ms (1290 modules)
+ GET /api/species 200 in 825ms
+ ✓ Compiled in 504ms (1304 modules)
+ GET /guia-especies 200 in 131ms
+ ✓ Compiled in 386ms (1300 modules)
+ GET /guia-especies 200 in 90ms
+ GET /api/species 200 in 350ms
+ GET /api/species 200 in 356ms
+ ✓ Compiled in 230ms (456 modules)
+ GET /guia-especies 200 in 29ms
+ GET /guia-especies 200 in 20ms
+ ✓ Compiled in 206ms (456 modules)
+ GET /guia-especies 200 in 80ms
+ ✓ Compiled in 179ms (456 modules)
+ GET /guia-especies 200 in 36ms
+ ✓ Compiled in 148ms (456 modules)
+ GET /guia-especies 200 in 29ms
+ ✓ Compiled in 163ms (456 modules)
+ GET /guia-especies 200 in 29ms
+ ✓ Compiled in 182ms (456 modules)
+ GET /guia-especies 200 in 31ms
+ ✓ Compiled in 233ms (456 modules)
+ ✓ Compiled in 207ms (456 modules)
+ GET /guia-especies 200 in 102ms
+ GET /guia-especies 200 in 35ms
