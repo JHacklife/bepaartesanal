@@ -3,11 +3,22 @@
 import { PrismaClient } from "@prisma/client"
 import { randomUUID } from "crypto"
 import { hash } from "bcryptjs"
+import { loadProjectEnv } from "./load-project-env.mjs"
+
+loadProjectEnv()
 
 const prisma = new PrismaClient()
 
-const TEST_USER_EMAIL = process.env.SEED_TEST_EMAIL || "test@bepa.local"
-const TEST_USER_PASSWORD = process.env.SEED_TEST_PASSWORD || "Test1234"
+const TEST_USER_EMAIL =
+  process.env.SEED_TEST_EMAIL ||
+  process.env.TEST_USER_1_EMAIL ||
+  process.env.TEST_USER_EMAIL ||
+  "test1@bepa.local"
+const TEST_USER_PASSWORD =
+  process.env.SEED_TEST_PASSWORD ||
+  process.env.TEST_USER_1_PASSWORD ||
+  process.env.TEST_USER_PASSWORD ||
+  "BepaTest1234!"
 
 const testData = [
   {

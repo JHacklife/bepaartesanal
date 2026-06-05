@@ -1,5 +1,8 @@
 ﻿import { PrismaClient } from "@prisma/client"
 import speciesCatalog from "../lib/species/catalog.json" with { type: "json" }
+import { loadProjectEnv } from "./load-project-env.mjs"
+
+loadProjectEnv()
 
 const prisma = new PrismaClient()
 
