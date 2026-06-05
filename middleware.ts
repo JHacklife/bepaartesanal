@@ -25,7 +25,14 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
-  const token = await getToken({ req, secret: authSecret })
+  // En algunos despliegues con proxy (ej. Hostinger), la cookie puede llegar
+  // con prefijo __Secure- aunque el runtime detecte http internamente.
+  // Probamos ambos modos para evitar falsos "sin sesion" y bucles al login.
+  let token = await getToken({ req, secret: authSecret, secureCookie: true })
+
+  if (!token) {
+    token = await getToken({ req, secret: authSecret, secureCookie: false })
+  }
 
   if (!token) {
     return NextResponse.redirect(new URL("/auth/signin", req.url))

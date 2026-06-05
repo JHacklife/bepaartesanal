@@ -177,3 +177,28 @@
  ✓ Compiled in 207ms (456 modules)
  GET /guia-especies 200 in 102ms
  GET /guia-especies 200 in 35ms
+ GET /guia-especies 200 in 374ms
+ ✓ Compiled /api/species in 355ms (838 modules)
+ ✓ Compiled (846 modules)
+ GET /api/auth/session 200 in 718ms
+ GET /api/species 200 in 963ms
+ ✓ Compiled /api/profile in 264ms (848 modules)
+ GET /api/profile 200 in 792ms
+ GET /guia-especies 200 in 407ms
+ GET /api/auth/session 200 in 35ms
+ GET /api/species 200 in 91ms
+ GET /api/profile 200 in 316ms
+ ✓ Compiled in 433ms (633 modules)
+ ✓ Compiled /_not-found in 469ms (1140 modules)
+ GET /guia-especies 404 in 687ms
+ GET /guia-especies 200 in 343ms
+ ✓ Compiled /api/species in 253ms (839 modules)
+ ✓ Compiled (847 modules)
+ GET /api/auth/session 200 in 729ms
+ GET /api/species 200 in 978ms
+ ✓ Compiled /api/profile in 321ms (849 modules)
+ GET /api/profile 200 in 555ms
+ ✓ Compiled in 168ms (456 modules)
+ GET /guia-especies 200 in 90ms
+ ✓ Compiled in 235ms (633 modules)
+ GET /guia-especies 200 in 32ms
