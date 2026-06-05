@@ -10,6 +10,30 @@ const authCookieNames = [
 ]
 
 const getPublicOrigin = (request: NextRequest) => {
+  const forwardedHostHeader = request.headers.get("x-forwarded-host") || request.headers.get("host")
+  const forwardedProtoHeader = request.headers.get("x-forwarded-proto")
+  const forwardedPortHeader = request.headers.get("x-forwarded-port")
+
+  const forwardedHost = forwardedHostHeader?.split(",")[0]?.trim()
+  const forwardedProto =
+    forwardedProtoHeader?.split(",")[0]?.trim() ||
+    request.nextUrl.protocol.replace(":", "") ||
+    "https"
+
+  if (forwardedHost) {
+    const hasExplicitPort = forwardedHost.includes(":")
+    const isDefaultPort =
+      (forwardedProto === "https" && forwardedPortHeader === "443") ||
+      (forwardedProto === "http" && forwardedPortHeader === "80")
+
+    const hostWithPort =
+      !hasExplicitPort && forwardedPortHeader && !isDefaultPort
+        ? `${forwardedHost}:${forwardedPortHeader}`
+        : forwardedHost
+
+    return `${forwardedProto}://${hostWithPort}`
+  }
+
   const configuredUrl = process.env.NEXTAUTH_URL || process.env.AUTH_URL
 
   if (configuredUrl) {
@@ -18,13 +42,6 @@ const getPublicOrigin = (request: NextRequest) => {
     } catch {
       // Si el entorno esta mal formado, usamos los headers del proxy.
     }
-  }
-
-  const forwardedHost = request.headers.get("x-forwarded-host")
-  const forwardedProto = request.headers.get("x-forwarded-proto") || "https"
-
-  if (forwardedHost) {
-    return `${forwardedProto}://${forwardedHost}`
   }
 
   return request.nextUrl.origin

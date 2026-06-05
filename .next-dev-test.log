@@ -202,3 +202,47 @@
  GET /guia-especies 200 in 90ms
  ✓ Compiled in 235ms (633 modules)
  GET /guia-especies 200 in 32ms
+ ✓ Compiled in 756ms (1151 modules)
+ ✓ Compiled /_not-found in 207ms (698 modules)
+ GET /guia-especies 404 in 420ms
+ GET /guia-especies 200 in 46ms
+ GET /guia-especies 200 in 328ms
+ ✓ Compiled /api/species in 228ms (839 modules)
+ ✓ Compiled (847 modules)
+ GET /api/auth/session 200 in 746ms
+ GET /api/species 200 in 963ms
+ ✓ Compiled /api/profile in 377ms (849 modules)
+ GET /api/profile 200 in 586ms
+ ✓ Compiled in 538ms (1305 modules)
+ GET /guia-especies 200 in 162ms
+ ✓ Compiled in 228ms (456 modules)
+ GET /guia-especies 200 in 44ms
+ ✓ Compiled in 519ms (1305 modules)
+ GET /guia-especies 200 in 119ms
+ ✓ Compiled in 161ms (456 modules)
+ GET /guia-especies 200 in 38ms
+ ✓ Compiled in 195ms (456 modules)
+ GET /guia-especies 200 in 40ms
+ ✓ Compiled in 166ms (456 modules)
+ GET /guia-especies 200 in 36ms
+ ✓ Compiled in 205ms (456 modules)
+ GET /guia-especies 200 in 36ms
+ ✓ Compiled in 172ms (456 modules)
+ GET /guia-especies 200 in 37ms
+ ✓ Compiled in 1436ms (1317 modules)
+ GET /guia-especies 200 in 1017ms
+ GET /guia-especies 200 in 42ms
+ GET /guia-especies 200 in 40ms
+ GET /guia-especies 200 in 35ms
+ ✓ Compiled in 167ms (456 modules)
+ GET /guia-especies 200 in 50ms
+ ✓ Compiled in 705ms (1154 modules)
+ GET /guia-especies 200 in 169ms
+ ✓ Compiled in 176ms (456 modules)
+ GET /guia-especies 200 in 48ms
+ ✓ Compiled in 173ms (456 modules)
+ GET /guia-especies 200 in 38ms
+ ✓ Compiled in 221ms (456 modules)
+ ✓ Compiled in 223ms (456 modules)
+ GET /guia-especies 200 in 119ms
+ GET /guia-especies 200 in 33ms
