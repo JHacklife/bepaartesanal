@@ -2,6 +2,7 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
+import { Prisma } from "@prisma/client"
 import { compare } from "bcryptjs"
 import { getPrismaClient } from "./server/prisma"
 import { authSecret } from "./auth-config"
@@ -46,9 +47,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email },
-        })
+        let user
+
+        try {
+          user = await prisma.user.findUnique({
+            where: { email },
+          })
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error)
+          const isDatabaseError =
+            error instanceof Prisma.PrismaClientInitializationError ||
+            error instanceof Prisma.PrismaClientKnownRequestError ||
+            /can't reach database server|authentication failed|access denied|connect timeout|server has closed the connection/i.test(
+              message,
+            )
+
+          console.error("[auth] Credentials database lookup failed", {
+            timestamp: new Date().toISOString(),
+            message,
+            errorKind: isDatabaseError ? "DATABASE_ERROR" : "UNKNOWN_ERROR",
+          })
+
+          return null
+        }
 
         if (!user || !user.password) {
           return null

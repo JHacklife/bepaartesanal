@@ -1,0 +1,102 @@
+[auth] Credentials database lookup failed {
+  timestamp: '2026-06-05T17:16:41.755Z',
+  message: '\n' +
+    'Invalid `prisma.user.findUnique()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Authentication failed against database server, the provided database credentials for `u950660407_dev` are not valid.\n' +
+    '\n' +
+    'Please make sure to provide valid database credentials for the database server at the configured address.',
+  errorKind: 'DATABASE_ERROR'
+}
+[31m[auth][error][0m CredentialsSignin: Read more at https://errors.authjs.dev#credentialssignin
+    at Module.callback (webpack-internal:///(rsc)/./node_modules/@auth/core/lib/actions/callback/index.js:246:23)
+    at async AuthInternal (webpack-internal:///(rsc)/./node_modules/@auth/core/lib/index.js:70:24)
+    at async Auth (webpack-internal:///(rsc)/./node_modules/@auth/core/index.js:130:34)
+    at async AppRouteRouteModule.do (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:5:38696)
+    at async AppRouteRouteModule.handle (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:5:45978)
+    at async responseGenerator (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:203:38)
+    at async AppRouteRouteModule.handleResponse (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:1:195185)
+    at async handleResponse (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:265:32)
+    at async handler (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:317:13)
+    at async DevServer.renderToResponseWithComponentsImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1422:9)
+    at async DevServer.renderPageComponent (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1474:24)
+    at async DevServer.renderToResponseImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1514:32)
+    at async DevServer.pipeImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1025:25)
+    at async NextNodeServer.handleCatchallRenderRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\next-server.js:393:17)
+    at async DevServer.handleRequestImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:916:17)
+    at async X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\dev\next-dev-server.js:400:20
+    at async Span.traceAsyncFn (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\dev\next-dev-server.js:396:24)
+    at async invokeRender (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:437:24)
+    at async requestHandlerImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:485:13)
+    at async Server.requestListener (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\start-server.js:226:13)
+[auth] Credentials database lookup failed {
+  timestamp: '2026-06-05T17:16:56.752Z',
+  message: '\n' +
+    'Invalid `prisma.user.findUnique()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Authentication failed against database server, the provided database credentials for `u950660407_dev` are not valid.\n' +
+    '\n' +
+    'Please make sure to provide valid database credentials for the database server at the configured address.',
+  errorKind: 'DATABASE_ERROR'
+}
+[31m[auth][error][0m CredentialsSignin: Read more at https://errors.authjs.dev#credentialssignin
+    at Module.callback (webpack-internal:///(rsc)/./node_modules/@auth/core/lib/actions/callback/index.js:246:23)
+    at async AuthInternal (webpack-internal:///(rsc)/./node_modules/@auth/core/lib/index.js:70:24)
+    at async Auth (webpack-internal:///(rsc)/./node_modules/@auth/core/index.js:130:34)
+    at async AppRouteRouteModule.do (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:5:38696)
+    at async AppRouteRouteModule.handle (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:5:45978)
+    at async responseGenerator (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:203:38)
+    at async AppRouteRouteModule.handleResponse (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:1:195185)
+    at async handleResponse (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:265:32)
+    at async handler (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:317:13)
+    at async DevServer.renderToResponseWithComponentsImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1422:9)
+    at async DevServer.renderPageComponent (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1474:24)
+    at async DevServer.renderToResponseImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1514:32)
+    at async DevServer.pipeImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1025:25)
+    at async NextNodeServer.handleCatchallRenderRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\next-server.js:393:17)
+    at async DevServer.handleRequestImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:916:17)
+    at async X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\dev\next-dev-server.js:400:20
+    at async Span.traceAsyncFn (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\dev\next-dev-server.js:396:24)
+    at async invokeRender (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:437:24)
+    at async requestHandlerImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:485:13)
+    at async Server.requestListener (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\start-server.js:226:13)
+[auth] Credentials database lookup failed {
+  timestamp: '2026-06-05T17:17:06.810Z',
+  message: '\n' +
+    'Invalid `prisma.user.findUnique()` invocation:\n' +
+    '\n' +
+    '\n' +
+    'Authentication failed against database server, the provided database credentials for `u950660407_dev` are not valid.\n' +
+    '\n' +
+    'Please make sure to provide valid database credentials for the database server at the configured address.',
+  errorKind: 'DATABASE_ERROR'
+}
+[31m[auth][error][0m CredentialsSignin: Read more at https://errors.authjs.dev#credentialssignin
+    at Module.callback (webpack-internal:///(rsc)/./node_modules/@auth/core/lib/actions/callback/index.js:246:23)
+    at async AuthInternal (webpack-internal:///(rsc)/./node_modules/@auth/core/lib/index.js:70:24)
+    at async Auth (webpack-internal:///(rsc)/./node_modules/@auth/core/index.js:130:34)
+    at async AppRouteRouteModule.do (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:5:38696)
+    at async AppRouteRouteModule.handle (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:5:45978)
+    at async responseGenerator (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:203:38)
+    at async AppRouteRouteModule.handleResponse (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:1:195185)
+    at async handleResponse (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:265:32)
+    at async handler (webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&page=%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fauth%2F%5B...nextauth%5D%2Froute.ts&appDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=X%3A%5CProyectos%5CFreelance%5CFundacionVidaSilvestre%5CProyectos%5CGithub%5Cbepaartesanal&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D&isGlobalNotFoundEnabled=!:317:13)
+    at async DevServer.renderToResponseWithComponentsImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1422:9)
+    at async DevServer.renderPageComponent (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1474:24)
+    at async DevServer.renderToResponseImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1514:32)
+    at async DevServer.pipeImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:1025:25)
+    at async NextNodeServer.handleCatchallRenderRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\next-server.js:393:17)
+    at async DevServer.handleRequestImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\base-server.js:916:17)
+    at async X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\dev\next-dev-server.js:400:20
+    at async Span.traceAsyncFn (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\dev\next-dev-server.js:396:24)
+    at async invokeRender (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:437:24)
+    at async requestHandlerImpl (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\router-server.js:485:13)
+    at async Server.requestListener (X:\Proyectos\Freelance\FundacionVidaSilvestre\Proyectos\Github\bepaartesanal\node_modules\next\dist\server\lib\start-server.js:226:13)

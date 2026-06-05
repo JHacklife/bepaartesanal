@@ -1,0 +1,26 @@
+
+> bepaartesanal@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+   ▲ Next.js 15.5.15
+   - Local:        http://127.0.0.1:3000
+   - Network:      http://127.0.0.1:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 2.6s
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 1968ms (429 modules)
+ GET /api/auth/csrf 200 in 2708ms
+ POST /api/auth/callback/credentials 302 in 372ms
+ GET /api/auth/session 200 in 20ms
+ ✓ Compiled /api/auth/logout in 469ms (431 modules)
+ POST /api/auth/logout 200 in 535ms
+ GET /api/auth/session 200 in 58ms
+ ✓ Compiled /middleware in 453ms (177 modules)
+ GET /api/auth/csrf 200 in 22ms
+ POST /api/auth/callback/credentials 302 in 140ms
+ GET /api/auth/csrf 200 in 22ms
+ POST /api/auth/callback/credentials 302 in 145ms
+ GET /api/auth/session 200 in 24ms
+ POST /api/auth/logout 200 in 12ms

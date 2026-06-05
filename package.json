@@ -14,6 +14,7 @@
     "db:seed:users": "node scripts/seed-test-users.mjs",
     "db:check": "node scripts/check-database.mjs",
     "db:studio": "node scripts/run-prisma.mjs studio",
+    "auth:check": "node scripts/check-auth-login.mjs",
     "dev:clean": "npm run clean && next dev",
     "dev": "next dev",
     "lint": "npm run typecheck",

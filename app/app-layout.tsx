@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useTransition } from "react"
 import { Fish, BarChart3, Settings, FileText, MessageSquare, Plus, BookOpen, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,12 +9,27 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { DelayedComponent } from "@/components/ui/delayed-component";
 import { ThemeManager } from "@/components/theme-manager";
 import Link from "next/link";
-import { signOutAction } from "@/app/actions/auth-actions";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [displayName, setDisplayName] = useState<string>("Usuario")
   const [avatarUrl, setAvatarUrl] = useState<string>("")
   const [loadingSession, setLoadingSession] = useState(true)
+  const [isSigningOut, startSignOutTransition] = useTransition()
+
+  const handleSignOut = () => {
+    startSignOutTransition(async () => {
+      try {
+        const response = await fetch("/api/auth/logout", {
+          method: "POST",
+          cache: "no-store",
+        })
+        const data = response.ok ? await response.json() : null
+        window.location.assign(data?.redirectUrl || "/auth/signin")
+      } catch {
+        window.location.assign("/auth/signin")
+      }
+    })
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -178,16 +193,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 Comentarios
               </Button>
             </Link>
-            <form action={signOutAction}>
-              <Button
-                type="submit"
-                variant="ghost"
-                className="w-full justify-start text-red-600 hover:text-red-700"
-              >
-                <LogOut className="w-4 h-4 mr-3" />
-                Cerrar sesión
-              </Button>
-            </form>
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full justify-start text-red-600 hover:text-red-700"
+              onClick={handleSignOut}
+              disabled={isSigningOut}
+            >
+              <LogOut className="w-4 h-4 mr-3" />
+              {isSigningOut ? "Cerrando..." : "Cerrar sesión"}
+            </Button>
           </div>
         </aside>
         {/* Main Content Area */}
