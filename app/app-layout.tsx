@@ -1,13 +1,14 @@
 "use client"
 
 import { useEffect, useState, useTransition } from "react"
-import { Fish, BarChart3, Settings, FileText, MessageSquare, Plus, BookOpen, User, LogOut } from "lucide-react";
+import { Fish, BarChart3, Settings, FileText, MessageSquare, Plus, BookOpen, User, LogOut, PanelLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DelayedComponent } from "@/components/ui/delayed-component";
 import { ThemeManager } from "@/components/theme-manager";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -15,6 +16,29 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [avatarUrl, setAvatarUrl] = useState<string>("")
   const [loadingSession, setLoadingSession] = useState(true)
   const [isSigningOut, startSignOutTransition] = useTransition()
+  const [isDesktop, setIsDesktop] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)")
+    const onChange = (event: MediaQueryListEvent) => {
+      setIsDesktop(event.matches)
+      setIsSidebarOpen(event.matches)
+    }
+
+    setIsDesktop(mql.matches)
+    setIsSidebarOpen(mql.matches)
+
+    mql.addEventListener("change", onChange)
+    return () => mql.removeEventListener("change", onChange)
+  }, [])
+
+  useEffect(() => {
+    if (!isDesktop) {
+      setIsSidebarOpen(false)
+    }
+  }, [pathname, isDesktop])
 
   const handleSignOut = () => {
     startSignOutTransition(async () => {
@@ -105,6 +129,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <header className="glass-card px-3 sm:px-6 py-3 sm:py-4 rounded-none">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 sm:h-9 sm:w-9 lg:hidden"
+              onClick={() => setIsSidebarOpen((prev) => !prev)}
+              aria-label={isSidebarOpen ? "Colapsar navegación" : "Expandir navegación"}
+              aria-expanded={isSidebarOpen}
+            >
+              {isSidebarOpen ? <X className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
+            </Button>
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center">
               <Fish className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
             </div>
@@ -159,8 +193,73 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <div className="flex h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] relative">
+        {!isDesktop && isSidebarOpen ? (
+          <button
+            type="button"
+            className="fixed left-0 right-0 bottom-0 top-[64px] sm:top-[80px] z-40 bg-black/40"
+            aria-label="Cerrar navegación"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        ) : null}
+
         {/* Sidebar */}
-        <aside className="fixed lg:static inset-y-0 left-0 z-50 w-64 glass border-r border-border mt-[64px] sm:mt-[80px] lg:mt-0 h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] lg:h-auto flex flex-col">
+        <aside
+          className={`fixed left-0 top-[64px] sm:top-[80px] z-50 w-[86vw] max-w-72 glass border-r border-border h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] flex flex-col transition-transform duration-300 lg:hidden ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+        >
+          <nav className="p-4 space-y-2">
+            <Link href="/dashboard">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => !isDesktop && setIsSidebarOpen(false)}>
+                <BarChart3 className="w-4 h-4 mr-3" />
+                Dashboard
+              </Button>
+            </Link>
+            <Link href="/mis-datos">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => !isDesktop && setIsSidebarOpen(false)}>
+                <FileText className="w-4 h-4 mr-3" />
+                Mis datos
+              </Button>
+            </Link>
+            <Link href="/guia-especies">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => !isDesktop && setIsSidebarOpen(false)}>
+                <BookOpen className="w-4 h-4 mr-3" />
+                Guía de especies
+              </Button>
+            </Link>
+            <Link href="/profile">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => !isDesktop && setIsSidebarOpen(false)}>
+                <User className="w-4 h-4 mr-3" />
+                Mi Perfil
+              </Button>
+            </Link>
+          </nav>
+          <div className="p-4 space-y-2 border-t border-border mt-auto">
+            <Link href="/settings">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => !isDesktop && setIsSidebarOpen(false)}>
+                <Settings className="w-4 h-4 mr-3" />
+                Configuración
+              </Button>
+            </Link>
+            <Link href="/feedback">
+              <Button variant="ghost" className="w-full justify-start" onClick={() => !isDesktop && setIsSidebarOpen(false)}>
+                <MessageSquare className="w-4 h-4 mr-3" />
+                Comentarios
+              </Button>
+            </Link>
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full justify-start text-red-600 hover:text-red-700"
+              onClick={handleSignOut}
+              disabled={isSigningOut}
+            >
+              <LogOut className="w-4 h-4 mr-3" />
+              {isSigningOut ? "Cerrando..." : "Cerrar sesión"}
+            </Button>
+          </div>
+        </aside>
+
+        <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-border lg:glass lg:h-[calc(100vh-80px)]">
           <nav className="p-4 space-y-2">
             <Link href="/dashboard">
               <Button variant="ghost" className="w-full justify-start">

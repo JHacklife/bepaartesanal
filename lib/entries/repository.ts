@@ -124,27 +124,43 @@ export interface EntriesRepository {
   add(entry: NewFishingEntry): Promise<FishingEntry>
 }
 
-const getErrorMessage = async (response: Response, fallbackMessage: string) => {
+type ApiErrorPayload = {
+  status: number
+  userMessage: string
+  originalMessage?: string
+  stack?: string
+}
+
+const getErrorPayload = async (response: Response, fallbackMessage: string): Promise<ApiErrorPayload> => {
   try {
     const payload = (await response.json()) as {
       error?: string
       message?: string
       title?: string
+      originalMessage?: string
+      stack?: string
     }
-    if (payload && typeof payload.message === "string") {
-      return payload.message
-    }
-    if (payload && typeof payload.error === "string") {
-      return payload.error
-    }
-    if (payload && typeof payload.title === "string") {
-      return payload.title
+    const userMessage =
+      typeof payload?.message === "string"
+        ? payload.message
+        : typeof payload?.error === "string"
+          ? payload.error
+          : typeof payload?.title === "string"
+            ? payload.title
+            : fallbackMessage
+
+    return {
+      status: response.status,
+      userMessage,
+      originalMessage: typeof payload?.originalMessage === "string" ? payload.originalMessage : undefined,
+      stack: typeof payload?.stack === "string" ? payload.stack : undefined,
     }
   } catch {
-    return fallbackMessage
+    return {
+      status: response.status,
+      userMessage: fallbackMessage,
+    }
   }
-
-  return fallbackMessage
 }
 
 class LocalStorageEntriesRepository implements EntriesRepository {
@@ -223,8 +239,13 @@ class SqlEntriesRepository implements EntriesRepository {
       })
 
       if (!response.ok) {
-        const message = await getErrorMessage(response, "No se pudieron obtener entradas desde SQL.")
-        console.warn("Fallo de SQL al listar entradas. Usando fallback local.", message)
+        const errorPayload = await getErrorPayload(response, "No se pudieron obtener entradas.")
+        console.error("[entriesRepository] Error al listar entradas. Usando fallback local.", {
+          status: errorPayload.status,
+          userMessage: errorPayload.userMessage,
+          originalMessage: errorPayload.originalMessage,
+          stack: errorPayload.stack,
+        })
         const localEntries = this.readLocalEntriesFallback().map(markAsUnsent)
         return [...unsentEntries, ...localEntries]
       }
@@ -248,7 +269,14 @@ class SqlEntriesRepository implements EntriesRepository {
     })
 
     if (!response.ok) {
-      throw new Error(await getErrorMessage(response, "No se pudo guardar la entrada en SQL."))
+      const errorPayload = await getErrorPayload(response, "No se pudo guardar la entrada.")
+      console.error("[entriesRepository] Error al guardar entrada", {
+        status: errorPayload.status,
+        userMessage: errorPayload.userMessage,
+        originalMessage: errorPayload.originalMessage,
+        stack: errorPayload.stack,
+      })
+      throw new Error(errorPayload.userMessage)
     }
 
     return markAsLoaded((await response.json()) as FishingEntry)

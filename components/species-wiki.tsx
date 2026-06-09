@@ -92,6 +92,8 @@ export function SpeciesWiki() {
     })
   }, [searchTerm, selectedCategory, selectedRegion, speciesList])
 
+  const isCatalogEmpty = !loading && !error && speciesList.length === 0
+
   const getCategoryColor = (category: Species["category"]) => {
     const colors: Record<Species["category"], string> = {
       pez: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
@@ -252,6 +254,16 @@ export function SpeciesWiki() {
           <p className="text-lg font-medium text-muted-foreground">No se pudo cargar la guia</p>
           <p className="text-sm text-muted-foreground max-w-md">{error}</p>
           <Button variant="outline" onClick={() => window.location.reload()}>Reintentar</Button>
+        </div>
+      ) : isCatalogEmpty ? (
+        <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">
+          <Fish className="w-14 h-14 text-muted-foreground/30" />
+          <p className="text-lg font-medium text-muted-foreground">La guia esta vacia</p>
+          <p className="text-sm text-muted-foreground">Todavia no hay especies cargadas. Puedes sugerir la primera.</p>
+          <Button variant="outline" onClick={() => router.push("/guia-especies/nueva-especie")} className="gap-2">
+            <Fish className="w-4 h-4" />
+            Sugerir especie
+          </Button>
         </div>
       ) : filteredSpecies.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">

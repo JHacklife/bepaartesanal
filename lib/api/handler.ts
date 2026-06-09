@@ -45,7 +45,7 @@ export function withApiHandler(
 
       if (!rl.allowed) {
         headers["Retry-After"] = String(rl.retryAfterSeconds)
-        return NextResponse.json(ApiErrors.rateLimitExceeded, {
+        return NextResponse.json({ ...ApiErrors.rateLimitExceeded, status: 429 }, {
           status: 429,
           headers,
         })
@@ -59,6 +59,8 @@ export function withApiHandler(
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error)
       const stack = error instanceof Error ? error.stack : undefined
+      const status = 500
+      const includeDebug = process.env.NODE_ENV !== "production"
 
       console.error(`[API Error] ${registryKey}`, {
         timestamp: new Date().toISOString(),
@@ -70,13 +72,13 @@ export function withApiHandler(
       // Devolver siempre JSON, nunca re-lanzar
       return NextResponse.json(
         {
-          title: "Error interno del servidor",
-          message: process.env.NODE_ENV === "production"
-            ? "Error al procesar la solicitud"
-            : message,
-          code: "INTERNAL_SERVER_ERROR",
+          title: ApiErrors.internalError.title,
+          message: ApiErrors.internalError.message,
+          code: ApiErrors.internalError.code,
+          status,
+          ...(includeDebug ? { originalMessage: message, stack } : {}),
         },
-        { status: 500 }
+        { status }
       )
     }
   }

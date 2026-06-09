@@ -9,6 +9,12 @@ export interface ApiErrorBody {
   message: string
   /** Código de error interno, útil para mapeo en cliente */
   code?: string
+  /** Código HTTP de la respuesta */
+  status?: number
+  /** Mensaje técnico original para depuración (no para UI de usuario) */
+  originalMessage?: string
+  /** Stacktrace técnico para depuración */
+  stack?: string
 }
 
 /** Construye una respuesta de error API estandarizada. */
