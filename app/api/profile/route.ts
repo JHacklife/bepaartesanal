@@ -3,6 +3,21 @@ import { auth } from "@/lib/auth"
 import { withApiHandler } from "@/lib/api/handler"
 import { isDatabaseConfigured, getPrismaClient } from "@/lib/server/prisma"
 
+const toNullableString = (value: unknown): string | null | undefined => {
+  if (typeof value === "undefined") return undefined
+  if (value === null) return null
+  const normalized = String(value).trim()
+  return normalized.length > 0 ? normalized : null
+}
+
+const toNullableInt = (value: unknown): number | null | undefined => {
+  if (typeof value === "undefined") return undefined
+  if (value === null || value === "") return null
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed) || parsed < 0) return null
+  return Math.floor(parsed)
+}
+
 export const GET = withApiHandler("GET", "/api/profile", async (req: NextRequest) => {
   if (!isDatabaseConfigured()) {
     return NextResponse.json({ title: "Base de datos no configurada", message: "DATABASE_URL no definida" }, { status: 503 })
@@ -35,11 +50,16 @@ export const GET = withApiHandler("GET", "/api/profile", async (req: NextRequest
     const publicProfile = {
       id: user.id,
       name: user.name,
+      email: user.email,
       image: user.profileImage || user.image,
+      profileImage: user.profileImage || user.image,
+      phoneNumber: user.phoneNumber,
+      documentId: user.documentId,
       fishingZone: user.fishingZone,
       yearsOfExperience: user.yearsOfExperience,
       boatName: user.boatName,
       bio: user.bio,
+      isProfilePublic: user.isProfilePublic,
       badges: user.badges,
       totalEntries: user.totalEntries,
       totalCatchWeight: user.totalCatchWeight,
@@ -79,14 +99,14 @@ export const PUT = withApiHandler("PUT", "/api/profile", async (req: NextRequest
     const updatedUser = await prisma.user.update({
       where: { id: session.user.id },
       data: {
-        name: body.name ? String(body.name) : undefined,
-        phoneNumber: body.phoneNumber ? String(body.phoneNumber) : undefined,
-        fishingZone: body.fishingZone ? String(body.fishingZone) : undefined,
-        yearsOfExperience: body.yearsOfExperience ? Number(body.yearsOfExperience) : undefined,
-        boatName: body.boatName ? String(body.boatName) : undefined,
-        documentId: body.documentId ? String(body.documentId) : undefined,
-        bio: body.bio ? String(body.bio) : undefined,
-        profileImage: body.profileImage ? String(body.profileImage) : undefined,
+        name: toNullableString(body.name),
+        phoneNumber: toNullableString(body.phoneNumber),
+        fishingZone: toNullableString(body.fishingZone),
+        yearsOfExperience: toNullableInt(body.yearsOfExperience),
+        boatName: toNullableString(body.boatName),
+        documentId: toNullableString(body.documentId),
+        bio: toNullableString(body.bio),
+        profileImage: toNullableString(body.profileImage),
         isProfilePublic: typeof body.isProfilePublic === 'boolean' ? body.isProfilePublic : undefined,
       },
     })
@@ -97,6 +117,7 @@ export const PUT = withApiHandler("PUT", "/api/profile", async (req: NextRequest
         id: updatedUser.id,
         name: updatedUser.name,
         email: updatedUser.email,
+        image: updatedUser.profileImage || updatedUser.image,
         phoneNumber: updatedUser.phoneNumber,
         fishingZone: updatedUser.fishingZone,
         yearsOfExperience: updatedUser.yearsOfExperience,

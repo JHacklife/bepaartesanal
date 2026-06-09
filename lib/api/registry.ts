@@ -76,4 +76,16 @@ export const apiRegistry: Record<string, ApiEndpointConfig> = {
     requiresAuth: true,
     rateLimit: { maxRequests: 30, windowMs: 60 * 1000 }, // 30 por minuto
   },
+
+  // ── Comentarios / sugerencias ───────────────────────────────────────────
+  "GET /api/feedback": {
+    description: "Listar comentarios del usuario autenticado",
+    requiresAuth: true,
+    rateLimit: { maxRequests: 120, windowMs: 60 * 1000 }, // 120 por minuto
+  },
+  "POST /api/feedback": {
+    description: "Crear comentario/sugerencia en historial de base de datos",
+    requiresAuth: true,
+    rateLimit: { maxRequests: 30, windowMs: 60 * 1000 }, // 30 por minuto
+  },
 }

@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { useApiError } from "@/hooks/use-api-error"
 import { toast } from "sonner"
-import { Camera, Award, Fish, Waves, Trophy, AlertTriangle, RefreshCw } from "lucide-react"
+import { Camera, Award, AlertTriangle, RefreshCw } from "lucide-react"
 import type { EarnedBadge } from "@/lib/config/badges"
 
 interface UserProfile {
@@ -60,15 +60,15 @@ export function ProfilePanel() {
     try {
       const response = await fetch("/api/profile")
       if (!response.ok) throw new Error("Error al cargar perfil")
-      const { profile } = await response.json()
+      const { profile, sensitive } = await response.json()
       setProfile(profile)
       setFormData({
         name: profile.name || "",
-        phoneNumber: profile.phoneNumber || "",
+        phoneNumber: profile.phoneNumber || sensitive?.phoneNumber || "",
         fishingZone: profile.fishingZone || "",
         yearsOfExperience: profile.yearsOfExperience?.toString() || "",
         boatName: profile.boatName || "",
-        documentId: profile.documentId || "",
+        documentId: profile.documentId || sensitive?.documentId || "",
         bio: profile.bio || "",
         isProfilePublic: profile.isProfilePublic ?? true,
       })
@@ -325,7 +325,7 @@ export function ProfilePanel() {
             <div className="sm:col-span-2 pt-2">
               <h3 className="text-sm font-semibold text-foreground">Perfil de pescador</h3>
               <p className="text-xs text-muted-foreground mt-1">
-                Completa esta sección para mejorar tus estadísticas y la trazabilidad de tus registros.
+                Completa esta sección para mantener tu información profesional y operativa al día.
               </p>
             </div>
             <div>
@@ -393,45 +393,6 @@ export function ProfilePanel() {
           <Button onClick={handleSave} disabled={saving} className="w-full">
             {saving ? "Guardando..." : "Guardar cambios"}
           </Button>
-        </CardContent>
-      </Card>
-
-      {/* Estadísticas */}
-      <Card className="glass-card">
-        <CardHeader>
-          <CardTitle className="text-lg">Estadísticas</CardTitle>
-          <CardDescription>Tu actividad en la bitácora</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                <Fish className="w-6 h-6 text-blue-600 dark:text-blue-300" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Entradas registradas</p>
-                <p className="text-2xl font-bold">{profile.totalEntries || 0}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
-                <Waves className="w-6 h-6 text-green-600 dark:text-green-300" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Peso total capturado</p>
-                <p className="text-2xl font-bold">{profile.totalCatchWeight?.toFixed(1) || 0} kg</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-amber-600 dark:text-amber-300" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Especie favorita</p>
-                <p className="text-xl font-bold truncate">{profile.favoriteSpecies || "—"}</p>
-              </div>
-            </div>
-          </div>
         </CardContent>
       </Card>
 

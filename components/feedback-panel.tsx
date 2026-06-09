@@ -1,38 +1,123 @@
+﻿"use client"
+
+import { useEffect, useMemo, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { MessageSquare, Send, Star, CheckCircle } from "lucide-react"
+import { useApiError } from "@/hooks/use-api-error"
+import { toast } from "sonner"
+import { MessageSquare, Send, Star, CheckCircle, RefreshCw } from "lucide-react"
+
+type FeedbackType = "bug" | "feature" | "improvement" | "general"
+
+type FeedbackItem = {
+  id: string
+  type: FeedbackType
+  message: string
+  status: string
+  response?: string | null
+  createdAt: string
+}
+
+const typeLabels: Record<FeedbackType, string> = {
+  bug: "Error",
+  feature: "Función",
+  improvement: "Mejora",
+  general: "General",
+}
+
+const formatDate = (value: string) => {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+  return date.toLocaleDateString("es-AR")
+}
 
 export function FeedbackPanel() {
-  const feedbackHistory = [
-    {
-      id: 1,
-      date: "2024-01-10",
-      type: "Sugerencia",
-      message: "Sería útil poder agregar fotos de las capturas",
-      status: "En revisión",
-      response: null,
-    },
-    {
-      id: 2,
-      date: "2024-01-05",
-      type: "Error",
-      message: "La app se cierra cuando intento exportar datos grandes",
-      status: "Resuelto",
-      response: "Gracias por reportar este error. Ha sido corregido en la versión 1.2.1",
-    },
-    {
-      id: 3,
-      date: "2023-12-28",
-      type: "Mejora",
-      message: "El mapa podría mostrar las corrientes marinas",
-      status: "Planificado",
-      response: "Excelente idea. Estamos trabajando en integrar datos oceanográficos.",
-    },
-  ]
+  const { handleApiError } = useApiError()
+  const [items, setItems] = useState<FeedbackItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [sending, setSending] = useState(false)
+  const [type, setType] = useState<FeedbackType | "">("")
+  const [message, setMessage] = useState("")
+
+  const loadFeedback = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch("/api/feedback", { cache: "no-store" })
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}))
+        throw payload
+      }
+
+      const payload = (await response.json()) as { items?: FeedbackItem[] }
+      setItems(Array.isArray(payload.items) ? payload.items : [])
+    } catch (error) {
+      handleApiError(error, "Error al cargar comentarios", "No se pudo cargar tu historial de comentarios")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    loadFeedback()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const canSend = useMemo(() => {
+    return type.length > 0 && message.trim().length >= 10 && !sending
+  }, [message, sending, type])
+
+  const handleSubmit = async () => {
+    if (!type) {
+      toast.error("Falta el tipo", { description: "Selecciona el tipo de comentario." })
+      return
+    }
+
+    const normalizedMessage = message.trim()
+    if (normalizedMessage.length < 10) {
+      toast.error("Mensaje muy corto", { description: "Escribe al menos 10 caracteres." })
+      return
+    }
+
+    setSending(true)
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, message: normalizedMessage }),
+      })
+
+      const payload = (await response.json()) as {
+        message?: string
+        item?: FeedbackItem
+        title?: string
+      }
+
+      if (!response.ok) {
+        throw payload
+      }
+
+      if (payload.item) {
+        setItems((prev) => [payload.item as FeedbackItem, ...prev])
+      } else {
+        await loadFeedback()
+      }
+
+      setType("")
+      setMessage("")
+
+      toast.success("Comentario enviado", {
+        description: "Tu comentario fue guardado correctamente.",
+      })
+    } catch (error) {
+      handleApiError(error, "Error al enviar comentario", "No se pudo enviar tu comentario")
+    } finally {
+      setSending(false)
+    }
+  }
 
   return (
     <div className="space-y-4 sm:space-y-6 p-4 sm:p-0">
@@ -41,7 +126,6 @@ export function FeedbackPanel() {
         <p className="text-sm sm:text-base text-gray-600">Tu opinión nos ayuda a mejorar BEPA continuamente</p>
       </div>
 
-      {/* New Feedback Form */}
       <Card className="glass-card">
         <CardHeader className="p-4 sm:p-6">
           <CardTitle className="flex items-center text-base sm:text-lg">
@@ -53,7 +137,7 @@ export function FeedbackPanel() {
         <CardContent className="space-y-4 p-4 sm:p-6">
           <div>
             <Label htmlFor="feedback-type" className="text-sm sm:text-base">Tipo de comentario</Label>
-            <Select>
+            <Select value={type} onValueChange={(value) => setType(value as FeedbackType)}>
               <SelectTrigger className="mt-2">
                 <SelectValue placeholder="Selecciona el tipo" />
               </SelectTrigger>
@@ -70,77 +154,88 @@ export function FeedbackPanel() {
             <Label htmlFor="feedback-message" className="text-sm sm:text-base">Tu mensaje</Label>
             <Textarea
               id="feedback-message"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
               placeholder="Describe tu experiencia, problema o sugerencia en detalle..."
               className="min-h-24 sm:min-h-32 mt-2 text-sm sm:text-base"
             />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
-            <Button className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto" disabled={!canSend} onClick={handleSubmit}>
               <Send className="w-4 h-4 mr-2" />
-              Enviar comentario
+              {sending ? "Enviando..." : "Enviar comentario"}
             </Button>
             <p className="text-xs sm:text-sm text-gray-500 text-center sm:text-left">Responderemos en 2-3 días hábiles</p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Feedback History */}
       <Card className="glass-card">
         <CardHeader className="p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <CardTitle className="text-base sm:text-lg">Historial de comentarios</CardTitle>
-            <Badge variant="secondary" className="w-fit text-xs sm:text-sm">
-              {feedbackHistory.length} comentarios enviados
-            </Badge>
+            <div className="flex items-center gap-2">
+              <Badge variant="secondary" className="w-fit text-xs sm:text-sm">
+                {items.length} comentarios enviados
+              </Badge>
+              <Button variant="outline" size="sm" onClick={loadFeedback} disabled={loading}>
+                <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+              </Button>
+            </div>
           </div>
           <CardDescription className="text-sm">Seguimiento de tus comentarios y nuestras respuestas</CardDescription>
         </CardHeader>
         <CardContent className="p-4 sm:p-6">
-          <div className="space-y-3 sm:space-y-4">
-            {feedbackHistory.map((feedback) => (
-              <div key={feedback.id} className="border rounded-lg p-3 sm:p-4 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="outline" className="text-xs">{feedback.type}</Badge>
-                    <span className="text-xs sm:text-sm text-gray-500">{feedback.date}</span>
+          {loading ? (
+            <p className="text-sm text-muted-foreground">Cargando historial...</p>
+          ) : items.length === 0 ? (
+            <p className="text-sm text-muted-foreground">Todavía no enviaste comentarios.</p>
+          ) : (
+            <div className="space-y-3 sm:space-y-4">
+              {items.map((feedback) => (
+                <div key={feedback.id} className="border rounded-lg p-3 sm:p-4 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge variant="outline" className="text-xs">{typeLabels[feedback.type] || feedback.type}</Badge>
+                      <span className="text-xs sm:text-sm text-gray-500">{formatDate(feedback.createdAt)}</span>
+                    </div>
+                    <Badge
+                      variant={
+                        feedback.status === "Resuelto"
+                          ? "secondary"
+                          : feedback.status === "Planificado"
+                            ? "default"
+                            : "destructive"
+                      }
+                      className={
+                        feedback.status === "Resuelto"
+                          ? "bg-green-100 text-green-800 text-xs"
+                          : feedback.status === "Planificado"
+                            ? "bg-blue-100 text-blue-800 text-xs"
+                            : "text-xs"
+                      }
+                    >
+                      {feedback.status === "Resuelto" && <CheckCircle className="w-3 h-3 mr-1" />}
+                      {feedback.status}
+                    </Badge>
                   </div>
-                  <Badge
-                    variant={
-                      feedback.status === "Resuelto"
-                        ? "secondary"
-                        : feedback.status === "Planificado"
-                          ? "default"
-                          : "destructive"
-                    }
-                    className={
-                      feedback.status === "Resuelto"
-                        ? "bg-green-100 text-green-800 text-xs"
-                        : feedback.status === "Planificado"
-                          ? "bg-blue-100 text-blue-800 text-xs"
-                          : "text-xs"
-                    }
-                  >
-                    {feedback.status === "Resuelto" && <CheckCircle className="w-3 h-3 mr-1" />}
-                    {feedback.status}
-                  </Badge>
+
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-wrap">{feedback.message}</p>
+
+                  {feedback.response && (
+                    <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
+                      <p className="text-xs sm:text-sm font-medium text-blue-900 mb-1">Respuesta del equipo:</p>
+                      <p className="text-xs sm:text-sm text-blue-800 leading-relaxed">{feedback.response}</p>
+                    </div>
+                  )}
                 </div>
-
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{feedback.message}</p>
-
-                {feedback.response && (
-                  <div className="bg-blue-50 p-3 rounded border-l-4 border-blue-400">
-                    <p className="text-xs sm:text-sm font-medium text-blue-900 mb-1">Respuesta del equipo:</p>
-                    <p className="text-xs sm:text-sm text-blue-800 leading-relaxed">{feedback.response}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
 
-      {/* Pilot Project Info */}
       <Card className="glass-card">
         <CardHeader className="p-4 sm:p-6">
           <CardTitle className="flex items-center text-base sm:text-lg">

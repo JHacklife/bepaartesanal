@@ -1,6 +1,7 @@
 ﻿import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { withApiHandler } from "@/lib/api/handler"
+import { getPrismaClient, isDatabaseConfigured } from "@/lib/server/prisma"
 import fs from "fs"
 import path from "path"
 
@@ -18,6 +19,10 @@ const ensureUploadDir = () => {
 }
 
 export const POST = withApiHandler("POST", "/api/upload-profile-photo", async (req: NextRequest) => {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json({ title: "Base de datos no configurada", message: "DATABASE_URL no definida" }, { status: 503 })
+  }
+
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ title: "No autorizado", message: "Debes iniciar sesión" }, { status: 401 })
@@ -59,6 +64,15 @@ export const POST = withApiHandler("POST", "/api/upload-profile-photo", async (r
     fs.writeFileSync(filepath, Buffer.from(buffer))
 
     const relativePath = `${UPLOAD_PUBLIC_PATH}/${filename}`
+    const prisma = getPrismaClient()
+
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: {
+        profileImage: relativePath,
+        image: relativePath,
+      },
+    })
 
     return NextResponse.json(
       {

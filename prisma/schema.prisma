@@ -164,8 +164,27 @@ model User {
   accounts      Account[]
   sessions      Session[]
   entries       FishingEntry[]
+  feedbackItems FeedbackItem[]
 
   @@map("users")
+}
+
+model FeedbackItem {
+  id               String   @id @default(cuid())
+  userId           String
+  type             String
+  message          String   @db.Text
+  status           String   @default("En revisión")
+  response         String?  @db.Text
+  emailSent        Boolean  @default(false)
+  emailError       String?  @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("feedback_items")
 }
 
 model Account {
